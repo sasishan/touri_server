@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TouriDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Attribute">
+    <Key>
+      <PropertyRef Name="AttributeId" />
+    </Key>
+    <Property Name="AttributeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AttributeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ReviewedAttributes" Relationship="Self.FK_ReviewedAttributes_Attribute" FromRole="Attributes" ToRole="ReviewedAttributes" />
+  </EntityType>
+  <EntityType Name="Expertise">
+    <Key>
+      <PropertyRef Name="expertiseId" />
+    </Key>
+    <Property Name="expertiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="expertise1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="imageId" Type="Int32" />
+    <NavigationProperty Name="GuideExpertises" Relationship="Self.FK_GuideExpertises_Expertises" FromRole="Expertises" ToRole="GuideExpertises" />
+  </EntityType>
+  <EntityType Name="Fluency">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fluency1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="GuideLanguages" Relationship="Self.FK_GuideLanguages_Fluency" FromRole="Fluency" ToRole="GuideLanguages" />
+  </EntityType>
+  <EntityType Name="GuideExpertise">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="expertiseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Expertise" Relationship="Self.FK_GuideExpertises_Expertises" FromRole="GuideExpertises" ToRole="Expertises" />
+    <NavigationProperty Name="GuideProfile" Relationship="Self.FK_GuideExpertises_GuideExpertises" FromRole="GuideExpertises" ToRole="GuideProfile" />
+  </EntityType>
+  <EntityType Name="GuideLanguage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="languageId" Type="Int32" Nullable="false" />
+    <Property Name="fluency" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Fluency1" Relationship="Self.FK_GuideLanguages_Fluency" FromRole="GuideLanguages" ToRole="Fluency" />
+    <NavigationProperty Name="GuideProfile" Relationship="Self.FK_GuideLanguages_GuideProfile" FromRole="GuideLanguages" ToRole="GuideProfile" />
+    <NavigationProperty Name="Language" Relationship="Self.FK_GuideLanguages_Languages" FromRole="GuideLanguages" ToRole="Languages" />
+  </EntityType>
+  <EntityType Name="GuideLocation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="cityServed" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="GuideProfile" Relationship="Self.FK_GuideLocations_GuideProfile" FromRole="GuideLocations" ToRole="GuideProfile" />
+  </EntityType>
+  <EntityType Name="GuideProfile">
+    <Key>
+      <PropertyRef Name="guideId" />
+    </Key>
+    <Property Name="guideId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="address2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="profileImage" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GuideExpertises" Relationship="Self.FK_GuideExpertises_GuideExpertises" FromRole="GuideProfile" ToRole="GuideExpertises" />
+    <NavigationProperty Name="GuideLanguages" Relationship="Self.FK_GuideLanguages_GuideProfile" FromRole="GuideProfile" ToRole="GuideLanguages" />
+    <NavigationProperty Name="GuideLocations" Relationship="Self.FK_GuideLocations_GuideProfile" FromRole="GuideProfile" ToRole="GuideLocations" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK_GuideId" FromRole="GuideProfile" ToRole="Reviews" />
+    <NavigationProperty Name="TouriImage" Relationship="Self.FK_GuideProfile_Images" FromRole="GuideProfile" ToRole="TouriImages" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="LanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Language1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="GuideLanguages" Relationship="Self.FK_GuideLanguages_Languages" FromRole="Languages" ToRole="GuideLanguages" />
+  </EntityType>
+  <EntityType Name="ReviewedAttribute">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeId" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="ReviewComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Attribute" Relationship="Self.FK_ReviewedAttributes_Attribute" FromRole="ReviewedAttributes" ToRole="Attributes" />
+    <NavigationProperty Name="Review" Relationship="Self.FK_ReviewedAttributes_Review" FromRole="ReviewedAttributes" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GuideId" Type="Int32" Nullable="false" />
+    <Property Name="TravellerId" Type="Int32" Nullable="false" />
+    <Property Name="ReviewDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="GuideExperienceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReviewComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GuideProfile" Relationship="Self.FK_GuideId" FromRole="Reviews" ToRole="GuideProfile" />
+    <NavigationProperty Name="ReviewedAttribute" Relationship="Self.FK_ReviewedAttributes_Review" FromRole="Reviews" ToRole="ReviewedAttributes" />
+  </EntityType>
+  <EntityType Name="TouriImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dateuploaded" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="GuideProfiles" Relationship="Self.FK_GuideProfile_Images" FromRole="TouriImages" ToRole="GuideProfile" />
+  </EntityType>
+  <EntityType Name="TravellerProfile">
+    <Key>
+      <PropertyRef Name="travellerId" />
+    </Key>
+    <Property Name="travellerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_ReviewedAttributes_Attribute">
+    <End Role="Attributes" Type="Self.Attribute" Multiplicity="1" />
+    <End Role="ReviewedAttributes" Type="Self.ReviewedAttribute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attributes">
+        <PropertyRef Name="AttributeId" />
+      </Principal>
+      <Dependent Role="ReviewedAttributes">
+        <PropertyRef Name="AttributeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideExpertises_Expertises">
+    <End Role="Expertises" Type="Self.Expertise" Multiplicity="1" />
+    <End Role="GuideExpertises" Type="TouriDBModel.GuideExpertise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expertises">
+        <PropertyRef Name="expertiseId" />
+      </Principal>
+      <Dependent Role="GuideExpertises">
+        <PropertyRef Name="expertiseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLanguages_Fluency">
+    <End Role="Fluency" Type="Self.Fluency" Multiplicity="1" />
+    <End Role="GuideLanguages" Type="Self.GuideLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fluency">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GuideLanguages">
+        <PropertyRef Name="fluency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideExpertises_GuideExpertises">
+    <End Role="GuideProfile" Type="Self.GuideProfile" Multiplicity="1" />
+    <End Role="GuideExpertises" Type="TouriDBModel.GuideExpertise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="GuideExpertises">
+        <PropertyRef Name="guideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLanguages_GuideProfile">
+    <End Role="GuideProfile" Type="Self.GuideProfile" Multiplicity="1" />
+    <End Role="GuideLanguages" Type="Self.GuideLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="GuideLanguages">
+        <PropertyRef Name="guideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLanguages_Languages">
+    <End Role="Languages" Type="Self.Language" Multiplicity="1" />
+    <End Role="GuideLanguages" Type="Self.GuideLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="GuideLanguages">
+        <PropertyRef Name="languageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLocations_GuideProfile">
+    <End Role="GuideProfile" Type="Self.GuideProfile" Multiplicity="1" />
+    <End Role="GuideLocations" Type="Self.GuideLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="GuideLocations">
+        <PropertyRef Name="guideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideId">
+    <End Role="GuideProfile" Type="Self.GuideProfile" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="GuideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideProfile_Images">
+    <End Role="TouriImages" Type="Self.TouriImage" Multiplicity="1" />
+    <End Role="GuideProfile" Type="Self.GuideProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TouriImages">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GuideProfile">
+        <PropertyRef Name="profileImage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewedAttributes_Review">
+    <End Role="Reviews" Type="Self.Review" Multiplicity="1" />
+    <End Role="ReviewedAttributes" Type="Self.ReviewedAttribute" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Reviews">
+        <PropertyRef Name="ReviewId" />
+      </Principal>
+      <Dependent Role="ReviewedAttributes">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Attributes" EntityType="Self.Attribute" />
+    <EntitySet Name="Expertises" EntityType="Self.Expertise" />
+    <EntitySet Name="Fluencies" EntityType="Self.Fluency" />
+    <EntitySet Name="GuideExpertises" EntityType="TouriDBModel.GuideExpertise" />
+    <EntitySet Name="GuideLanguages" EntityType="Self.GuideLanguage" />
+    <EntitySet Name="GuideLocations" EntityType="Self.GuideLocation" />
+    <EntitySet Name="GuideProfiles" EntityType="Self.GuideProfile" />
+    <EntitySet Name="Languages" EntityType="Self.Language" />
+    <EntitySet Name="ReviewedAttributes" EntityType="Self.ReviewedAttribute" />
+    <EntitySet Name="Reviews" EntityType="Self.Review" />
+    <EntitySet Name="TouriImages" EntityType="Self.TouriImage" />
+    <EntitySet Name="TravellerProfiles" EntityType="Self.TravellerProfile" />
+    <AssociationSet Name="FK_ReviewedAttributes_Attribute" Association="Self.FK_ReviewedAttributes_Attribute">
+      <End Role="Attributes" EntitySet="Attributes" />
+      <End Role="ReviewedAttributes" EntitySet="ReviewedAttributes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideExpertises_Expertises" Association="Self.FK_GuideExpertises_Expertises">
+      <End Role="Expertises" EntitySet="Expertises" />
+      <End Role="GuideExpertises" EntitySet="GuideExpertises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLanguages_Fluency" Association="Self.FK_GuideLanguages_Fluency">
+      <End Role="Fluency" EntitySet="Fluencies" />
+      <End Role="GuideLanguages" EntitySet="GuideLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideExpertises_GuideExpertises" Association="Self.FK_GuideExpertises_GuideExpertises">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="GuideExpertises" EntitySet="GuideExpertises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLanguages_GuideProfile" Association="Self.FK_GuideLanguages_GuideProfile">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="GuideLanguages" EntitySet="GuideLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLanguages_Languages" Association="Self.FK_GuideLanguages_Languages">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="GuideLanguages" EntitySet="GuideLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLocations_GuideProfile" Association="Self.FK_GuideLocations_GuideProfile">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="GuideLocations" EntitySet="GuideLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideId" Association="Self.FK_GuideId">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideProfile_Images" Association="Self.FK_GuideProfile_Images">
+      <End Role="TouriImages" EntitySet="TouriImages" />
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewedAttributes_Review" Association="Self.FK_ReviewedAttributes_Review">
+      <End Role="Reviews" EntitySet="Reviews" />
+      <End Role="ReviewedAttributes" EntitySet="ReviewedAttributes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

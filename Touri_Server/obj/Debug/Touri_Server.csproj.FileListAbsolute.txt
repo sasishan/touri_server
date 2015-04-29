@@ -1,0 +1,134 @@
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Touri_Server.dll.config
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Touri_Server.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Touri_Server.pdb
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Antlr3.Runtime.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\EntityFramework.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\EntityFramework.SqlServer.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Core.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Owin.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Facebook.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Google.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.OAuth.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Twitter.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Web.Infrastructure.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Newtonsoft.Json.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Owin.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Net.Http.Formatting.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Helpers.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Http.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Http.Owin.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Http.WebHost.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Mvc.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Optimization.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Razor.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.WebPages.Deployment.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.WebPages.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.WebPages.Razor.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\WebGrease.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Newtonsoft.Json.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Net.Http.Formatting.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Helpers.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Http.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Http.WebHost.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Mvc.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Optimization.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Razor.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.WebPages.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.WebPages.Deployment.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.WebPages.Razor.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Antlr3.Runtime.pdb
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\EntityFramework.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\EntityFramework.SqlServer.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Core.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Owin.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Facebook.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Cookies.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.OAuth.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Google.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Twitter.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\System.Web.Http.Owin.xml
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\obj\Debug\Touri_Server.dll
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\obj\Debug\Touri_Server.pdb
+c:\users\sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\obj\Debug\Touri_Server.csprojResolveAssemblyReference.cache
+C:\Users\Sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Sasi\documents\visual studio 2013\Projects\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Touri_Server.dll.config
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Touri_Server.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Touri_Server.pdb
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Antlr3.Runtime.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\EntityFramework.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\EntityFramework.SqlServer.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Google.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Web.Infrastructure.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Newtonsoft.Json.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Owin.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Net.Http.Formatting.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Helpers.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.Owin.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.WebHost.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Mvc.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Optimization.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Razor.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.WebPages.Deployment.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.WebPages.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.WebPages.Razor.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\WebGrease.dll
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Newtonsoft.Json.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Net.Http.Formatting.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Helpers.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.WebHost.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Mvc.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Optimization.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Razor.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.WebPages.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.WebPages.Deployment.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.WebPages.Razor.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Antlr3.Runtime.pdb
+C:\Bitbucket\Touri_Server\Touri_Server\bin\EntityFramework.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\EntityFramework.SqlServer.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Google.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.Owin.xml
+C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.csprojResolveAssemblyReference.cache
+C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.dll
+C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.pdb

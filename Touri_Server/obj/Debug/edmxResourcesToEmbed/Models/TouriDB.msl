@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TouriDBModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Attributes">
+      <EntityTypeMapping TypeName="TouriDBModel.Attribute">
+        <MappingFragment StoreEntitySet="Attributes">
+          <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
+          <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+          <ScalarProperty Name="AttributeDescription" ColumnName="AttributeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expertises">
+      <EntityTypeMapping TypeName="TouriDBModel.Expertise">
+        <MappingFragment StoreEntitySet="Expertises">
+          <ScalarProperty Name="expertiseId" ColumnName="expertiseId" />
+          <ScalarProperty Name="expertise1" ColumnName="expertise" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fluencies">
+      <EntityTypeMapping TypeName="TouriDBModel.Fluency">
+        <MappingFragment StoreEntitySet="Fluency">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fluency1" ColumnName="fluency" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuideExpertises">
+      <EntityTypeMapping TypeName="TouriDBModel.GuideExpertise">
+        <MappingFragment StoreEntitySet="GuideExpertises">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="guideId" ColumnName="guideId" />
+          <ScalarProperty Name="expertiseId" ColumnName="expertiseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuideLanguages">
+      <EntityTypeMapping TypeName="TouriDBModel.GuideLanguage">
+        <MappingFragment StoreEntitySet="GuideLanguages">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="guideId" ColumnName="guideId" />
+          <ScalarProperty Name="languageId" ColumnName="languageId" />
+          <ScalarProperty Name="fluency" ColumnName="fluency" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuideLocations">
+      <EntityTypeMapping TypeName="TouriDBModel.GuideLocation">
+        <MappingFragment StoreEntitySet="GuideLocations">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="guideId" ColumnName="guideId" />
+          <ScalarProperty Name="cityServed" ColumnName="cityServed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuideProfiles">
+      <EntityTypeMapping TypeName="TouriDBModel.GuideProfile">
+        <MappingFragment StoreEntitySet="GuideProfile">
+          <ScalarProperty Name="guideId" ColumnName="guideId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="profileImage" ColumnName="profileImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="TouriDBModel.Language">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Language1" ColumnName="Language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewedAttributes">
+      <EntityTypeMapping TypeName="TouriDBModel.ReviewedAttribute">
+        <MappingFragment StoreEntitySet="ReviewedAttributes">
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+          <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="ReviewComments" ColumnName="ReviewComments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="TouriDBModel.Review">
+        <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+          <ScalarProperty Name="GuideId" ColumnName="GuideId" />
+          <ScalarProperty Name="TravellerId" ColumnName="TravellerId" />
+          <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+          <ScalarProperty Name="GuideExperienceDate" ColumnName="GuideExperienceDate" />
+          <ScalarProperty Name="ReviewComments" ColumnName="ReviewComments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TouriImages">
+      <EntityTypeMapping TypeName="TouriDBModel.TouriImage">
+        <MappingFragment StoreEntitySet="TouriImages">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="filename" ColumnName="filename" />
+          <ScalarProperty Name="extension" ColumnName="extension" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="dateuploaded" ColumnName="dateuploaded" />
+          <ScalarProperty Name="category" ColumnName="category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TravellerProfiles">
+      <EntityTypeMapping TypeName="TouriDBModel.TravellerProfile">
+        <MappingFragment StoreEntitySet="TravellerProfile">
+          <ScalarProperty Name="travellerId" ColumnName="travellerId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NativusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="NativusDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Attributes" EntityType="NativusDBModel.Attribute" />
+    <EntitySet Name="Connections" EntityType="NativusDBModel.Connection" />
+    <EntitySet Name="Expertises" EntityType="NativusDBModel.Expertise" />
+    <EntitySet Name="Fluencies" EntityType="NativusDBModel.Fluency" />
+    <EntitySet Name="GuideExpertises" EntityType="NativusDBModel.GuideExpertises" />
+    <EntitySet Name="GuideLanguages" EntityType="NativusDBModel.GuideLanguage" />
+    <EntitySet Name="GuideLocations" EntityType="NativusDBModel.GuideLocation" />
+    <EntitySet Name="GuideProfiles" EntityType="NativusDBModel.GuideProfile" />
+    <EntitySet Name="Languages" EntityType="NativusDBModel.Language" />
+    <EntitySet Name="ReviewedAttributes" EntityType="NativusDBModel.ReviewedAttribute" />
+    <EntitySet Name="Reviews" EntityType="NativusDBModel.Review" />
+    <EntitySet Name="TouriImages" EntityType="NativusDBModel.TouriImage" />
+    <EntitySet Name="TravellerProfiles" EntityType="NativusDBModel.TravellerProfile" />
+    <AssociationSet Name="FK_ReviewedAttributes_Attribute" Association="NativusDBModel.FK_ReviewedAttributes_Attribute">
+      <End Role="Attribute" EntitySet="Attributes" />
+      <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideExpertises_Expertises" Association="NativusDBModel.FK_GuideExpertises_Expertises">
+      <End Role="Expertise" EntitySet="Expertises" />
+      <End Role="GuideExpertis" EntitySet="GuideExpertises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLanguages_Fluency" Association="NativusDBModel.FK_GuideLanguages_Fluency">
+      <End Role="Fluency" EntitySet="Fluencies" />
+      <End Role="GuideLanguage" EntitySet="GuideLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideExpertises_GuideExpertises" Association="NativusDBModel.FK_GuideExpertises_GuideExpertises">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="GuideExpertis" EntitySet="GuideExpertises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLanguages_GuideProfile" Association="NativusDBModel.FK_GuideLanguages_GuideProfile">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="GuideLanguage" EntitySet="GuideLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLanguages_Languages" Association="NativusDBModel.FK_GuideLanguages_Languages">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="GuideLanguage" EntitySet="GuideLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideLocations_GuideProfile" Association="NativusDBModel.FK_GuideLocations_GuideProfile">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="GuideLocation" EntitySet="GuideLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideId" Association="NativusDBModel.FK_GuideId">
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GuideProfile_Images" Association="NativusDBModel.FK_GuideProfile_Images">
+      <End Role="TouriImage" EntitySet="TouriImages" />
+      <End Role="GuideProfile" EntitySet="GuideProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewedAttributes_Review" Association="NativusDBModel.FK_ReviewedAttributes_Review">
+      <End Role="Review" EntitySet="Reviews" />
+      <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Attribute">
+    <Key>
+      <PropertyRef Name="AttributeId" />
+    </Key>
+    <Property Name="AttributeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="AttributeDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ReviewedAttributes" Relationship="NativusDBModel.FK_ReviewedAttributes_Attribute" FromRole="Attribute" ToRole="ReviewedAttribute" />
+  </EntityType>
+  <EntityType Name="Connection">
+    <Key>
+      <PropertyRef Name="connectionId" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="connectionId" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="lastConnected" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Expertise">
+    <Key>
+      <PropertyRef Name="expertiseId" />
+    </Key>
+    <Property Name="expertiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="expertise1" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="imageId" Type="Int32" />
+    <NavigationProperty Name="GuideExpertises" Relationship="NativusDBModel.FK_GuideExpertises_Expertises" FromRole="Expertise" ToRole="GuideExpertis" />
+  </EntityType>
+  <EntityType Name="Fluency">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fluency1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GuideLanguages" Relationship="NativusDBModel.FK_GuideLanguages_Fluency" FromRole="Fluency" ToRole="GuideLanguage" />
+  </EntityType>
+  <EntityType Name="GuideExpertises">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="expertiseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Expertise" Relationship="NativusDBModel.FK_GuideExpertises_Expertises" FromRole="GuideExpertis" ToRole="Expertise" />
+    <NavigationProperty Name="GuideProfile" Relationship="NativusDBModel.FK_GuideExpertises_GuideExpertises" FromRole="GuideExpertis" ToRole="GuideProfile" />
+  </EntityType>
+  <EntityType Name="GuideLanguage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="languageId" Type="Int32" Nullable="false" />
+    <Property Name="fluency" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Fluency1" Relationship="NativusDBModel.FK_GuideLanguages_Fluency" FromRole="GuideLanguage" ToRole="Fluency" />
+    <NavigationProperty Name="GuideProfile" Relationship="NativusDBModel.FK_GuideLanguages_GuideProfile" FromRole="GuideLanguage" ToRole="GuideProfile" />
+    <NavigationProperty Name="Language" Relationship="NativusDBModel.FK_GuideLanguages_Languages" FromRole="GuideLanguage" ToRole="Language" />
+  </EntityType>
+  <EntityType Name="GuideLocation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="cityServed" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="latitude" Type="Double" Nullable="false" />
+    <Property Name="longitude" Type="Double" Nullable="false" />
+    <NavigationProperty Name="GuideProfile" Relationship="NativusDBModel.FK_GuideLocations_GuideProfile" FromRole="GuideLocation" ToRole="GuideProfile" />
+  </EntityType>
+  <EntityType Name="GuideProfile">
+    <Key>
+      <PropertyRef Name="guideId" />
+    </Key>
+    <Property Name="guideId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="firstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="address2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="profileImage" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GuideExpertises" Relationship="NativusDBModel.FK_GuideExpertises_GuideExpertises" FromRole="GuideProfile" ToRole="GuideExpertis" />
+    <NavigationProperty Name="GuideLanguages" Relationship="NativusDBModel.FK_GuideLanguages_GuideProfile" FromRole="GuideProfile" ToRole="GuideLanguage" />
+    <NavigationProperty Name="GuideLocations" Relationship="NativusDBModel.FK_GuideLocations_GuideProfile" FromRole="GuideProfile" ToRole="GuideLocation" />
+    <NavigationProperty Name="Reviews" Relationship="NativusDBModel.FK_GuideId" FromRole="GuideProfile" ToRole="Review" />
+    <NavigationProperty Name="TouriImage" Relationship="NativusDBModel.FK_GuideProfile_Images" FromRole="GuideProfile" ToRole="TouriImage" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="LanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Language1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GuideLanguages" Relationship="NativusDBModel.FK_GuideLanguages_Languages" FromRole="Language" ToRole="GuideLanguage" />
+  </EntityType>
+  <EntityType Name="ReviewedAttribute">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeId" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="ReviewComments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Attribute" Relationship="NativusDBModel.FK_ReviewedAttributes_Attribute" FromRole="ReviewedAttribute" ToRole="Attribute" />
+    <NavigationProperty Name="Review" Relationship="NativusDBModel.FK_ReviewedAttributes_Review" FromRole="ReviewedAttribute" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GuideId" Type="Int32" Nullable="false" />
+    <Property Name="TravellerId" Type="Int32" Nullable="false" />
+    <Property Name="ReviewDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="GuideExperienceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReviewComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GuideProfile" Relationship="NativusDBModel.FK_GuideId" FromRole="Review" ToRole="GuideProfile" />
+    <NavigationProperty Name="ReviewedAttribute" Relationship="NativusDBModel.FK_ReviewedAttributes_Review" FromRole="Review" ToRole="ReviewedAttribute" />
+  </EntityType>
+  <EntityType Name="TouriImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filename" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="extension" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="path" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dateuploaded" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GuideProfiles" Relationship="NativusDBModel.FK_GuideProfile_Images" FromRole="TouriImage" ToRole="GuideProfile" />
+  </EntityType>
+  <EntityType Name="TravellerProfile">
+    <Key>
+      <PropertyRef Name="travellerId" />
+    </Key>
+    <Property Name="travellerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="firstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_ReviewedAttributes_Attribute">
+    <End Type="NativusDBModel.Attribute" Role="Attribute" Multiplicity="1" />
+    <End Type="NativusDBModel.ReviewedAttribute" Role="ReviewedAttribute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attribute">
+        <PropertyRef Name="AttributeId" />
+      </Principal>
+      <Dependent Role="ReviewedAttribute">
+        <PropertyRef Name="AttributeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideExpertises_Expertises">
+    <End Type="NativusDBModel.Expertise" Role="Expertise" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideExpertises" Role="GuideExpertis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expertise">
+        <PropertyRef Name="expertiseId" />
+      </Principal>
+      <Dependent Role="GuideExpertis">
+        <PropertyRef Name="expertiseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLanguages_Fluency">
+    <End Type="NativusDBModel.Fluency" Role="Fluency" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideLanguage" Role="GuideLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fluency">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GuideLanguage">
+        <PropertyRef Name="fluency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideExpertises_GuideExpertises">
+    <End Type="NativusDBModel.GuideProfile" Role="GuideProfile" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideExpertises" Role="GuideExpertis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="GuideExpertis">
+        <PropertyRef Name="guideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLanguages_GuideProfile">
+    <End Type="NativusDBModel.GuideProfile" Role="GuideProfile" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideLanguage" Role="GuideLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="GuideLanguage">
+        <PropertyRef Name="guideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLanguages_Languages">
+    <End Type="NativusDBModel.Language" Role="Language" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideLanguage" Role="GuideLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LanguageId" />
+      </Principal>
+      <Dependent Role="GuideLanguage">
+        <PropertyRef Name="languageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideLocations_GuideProfile">
+    <End Type="NativusDBModel.GuideProfile" Role="GuideProfile" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideLocation" Role="GuideLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="GuideLocation">
+        <PropertyRef Name="guideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideId">
+    <End Type="NativusDBModel.GuideProfile" Role="GuideProfile" Multiplicity="1" />
+    <End Type="NativusDBModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuideProfile">
+        <PropertyRef Name="guideId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="GuideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuideProfile_Images">
+    <End Type="NativusDBModel.TouriImage" Role="TouriImage" Multiplicity="1" />
+    <End Type="NativusDBModel.GuideProfile" Role="GuideProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TouriImage">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GuideProfile">
+        <PropertyRef Name="profileImage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewedAttributes_Review">
+    <End Type="NativusDBModel.Review" Role="Review" Multiplicity="1" />
+    <End Type="NativusDBModel.ReviewedAttribute" Role="ReviewedAttribute" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Review">
+        <PropertyRef Name="ReviewId" />
+      </Principal>
+      <Dependent Role="ReviewedAttribute">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
