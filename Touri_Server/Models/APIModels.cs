@@ -45,6 +45,7 @@ namespace Touri_Server.Models
     public class Guide
     {
         public int guideId { get; set; }
+        public string username { get; set; }
         public string fName { get; set; }
         public string lName { get; set; }
         public string address1 { get; set; }
@@ -82,6 +83,8 @@ namespace Touri_Server.Models
     {
         public int locationId { get; set; }
         public string location { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
 
         public void Location()
         {

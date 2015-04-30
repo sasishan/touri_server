@@ -129,6 +129,6 @@ C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Google.xml
 C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Bitbucket\Touri_Server\Touri_Server\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Bitbucket\Touri_Server\Touri_Server\bin\System.Web.Http.Owin.xml
-C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.csprojResolveAssemblyReference.cache
 C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.dll
 C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.pdb
+C:\Bitbucket\Touri_Server\Touri_Server\obj\Debug\Touri_Server.csprojResolveAssemblyReference.cache

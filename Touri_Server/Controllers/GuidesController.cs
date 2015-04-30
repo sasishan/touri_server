@@ -163,6 +163,26 @@ namespace Touri_Server.Controllers
             return g;
         }
 
+        // GET: api/Guides/username
+        [ResponseType(typeof(GuideProfile))]
+        public Guide GetGuideProfile(String username)
+        {
+
+           // GuideProfile guideProfile = db.GuideProfiles.Find(id);
+            var guide = (from guides in db.GuideProfiles                                                    
+                                        where guides.username==username
+                                        select guides);
+
+            if (guide.Count() == 0)
+            {
+                return null;
+            }
+
+
+            Guide g = convertToGuide(guide.First<GuideProfile>());
+            return g;
+        }
+
         // PUT: api/Guides/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutGuideProfile(int id, GuideProfile guideProfile)
@@ -198,14 +218,88 @@ namespace Touri_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Guides
+        // POST: api/Guides/<id>/expertise/<expertise>
+        [Route("api/guides/{guideid}/expertise/")]
         [ResponseType(typeof(GuideProfile))]
-        public IHttpActionResult PostGuideProfile(GuideProfile guideProfile)
+        public IHttpActionResult PostGuideLanguage(int guideId, ExpertiseWrapper expertise)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            GuideExpertises ge = new GuideExpertises();
+            ge.guideId = guideId;
+            ge.expertiseId = expertise.expertiseId;
+
+            db.GuideExpertises.Add(ge);
+            db.SaveChanges();
+
+            return Ok(ge);
+        }
+
+
+        // POST: api/Guides/<id>/language/<language>
+        [Route("api/guides/{guideid}/language/")]
+        [ResponseType(typeof(GuideProfile))]
+        public IHttpActionResult PostGuideLanguage(int guideId, LanguageWrapper language)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            GuideLanguage gl = new GuideLanguage();
+            gl.guideId = guideId;
+            gl.languageId = language.languageId;
+            gl.fluency = 4; //@todo
+
+            db.GuideLanguages.Add(gl);
+            db.SaveChanges();
+
+            return Ok(gl);
+        }
+
+        // POST: api/Guides/<id>/location/<location>
+        [Route("api/guides/{guideid}/location/")]
+        [ResponseType(typeof(GuideProfile))]
+        public IHttpActionResult PostGuideLocation(int guideId, LocationWrapper location)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            GuideLocation gl = new GuideLocation();
+            gl.guideId = guideId;
+            gl.cityServed = location.location;
+            gl.longitude = location.longitude;
+            gl.latitude = location.latitude;
+
+            db.GuideLocations.Add(gl);
+            db.SaveChanges();
+
+            return Ok(gl);
+        }
+
+        // POST: api/Guides
+        [ResponseType(typeof(GuideProfile))]
+        public IHttpActionResult PostGuideProfile(Guide guide)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            GuideProfile guideProfile = new GuideProfile();
+            guideProfile.username = guide.username;
+            guideProfile.firstName = guide.fName;
+            guideProfile.lastName = guide.lName;
+            guideProfile.guideId = 0;
+            guideProfile.address1 = guide.address1;
+            guideProfile.address2 = guide.address2;
+            guideProfile.description = guide.description;
+            guideProfile.profileImage = guide.profileImage;
 
             db.GuideProfiles.Add(guideProfile);
             db.SaveChanges();
@@ -243,12 +337,11 @@ namespace Touri_Server.Controllers
             return db.GuideProfiles.Count(e => e.guideId == id) > 0;
         }
 
-
-
         private Guide convertToGuide(GuideProfile guideProfile)
         {
             Guide g = new Guide();
 
+            g.username = guideProfile.username;
             g.fName = guideProfile.firstName;
             g.lName = guideProfile.lastName;
             g.guideId = guideProfile.guideId;
