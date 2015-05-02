@@ -78,8 +78,17 @@ namespace Touri_Server.Controllers
 
                     foreach (GuideProfile g in guideProfilesLocs)
                     {
+                      //  foreach (GuideProfile qg in queryProfiles)
+                        //{
+                            //if (qg.guideId!=g.guideId)
+                            //{
+                              //  profileCount++;
+                            //}
+                            
+//                        }
                         if (!queryProfiles.Contains(g))
                         {
+                            queryProfiles.Add(g);
                             profileCount++;
                         }
                     }
@@ -153,7 +162,7 @@ namespace Touri_Server.Controllers
             }
             else
             {
-                e.imageId = 0;
+                e.imageId = Constants.DefaultImageId;
             }
 
             return e;

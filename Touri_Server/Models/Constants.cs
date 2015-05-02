@@ -17,6 +17,7 @@ namespace Touri_Server.Models
         public static string OUT_JSON = "/json";
         public static string API_KEY = "AIzaSyDPRsZJ3iQcO8PdUU1yCjFAKA7etzg7PPM";
         public static int WithinDistanceDefaultInKM = 50;
+        public static int DefaultImageId = 1;
 
     }
 
