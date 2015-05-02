@@ -159,6 +159,7 @@ namespace Touri_Server.Controllers
         }
 
         // GET: api/Guides/username
+        [Authorize]
         [ResponseType(typeof(GuideProfile))]
         public Guide GetGuideProfile(String username)
         {
@@ -215,7 +216,7 @@ namespace Touri_Server.Controllers
         }
 
         // POST: api/Guides/<id>/expertise/<expertise>
-        [Route("api/guides/{guideid}/expertise/")]
+  /*      [Route("api/guides/{guideid}/expertise/")]
         [ResponseType(typeof(GuideProfile))]
         public IHttpActionResult PostGuideLanguage(int guideId, ExpertiseWrapper expertise)
         {
@@ -233,85 +234,9 @@ namespace Touri_Server.Controllers
 
             return Ok(ge);
         }
+        */
 
-
-        // POST: api/Guides/<id>/language/<language>
-        [Route("api/guides/{guideid}/language/")]
-        [ResponseType(typeof(GuideProfile))]
-        public IHttpActionResult PostGuideLanguage(int guideId, LanguageWrapper language)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            GuideLanguage gl = new GuideLanguage();
-            gl.guideId = guideId;
-            gl.languageId = language.languageId;
-            gl.fluency = 4; //@todo
-
-            db.GuideLanguages.Add(gl);
-            db.SaveChanges();
-
-            return Ok(gl);
-        }
-
-        // POST: api/Guides/<id>/location/<location>
-        [Route("api/guides/{guideid}/location/")]
-        [ResponseType(typeof(GuideProfile))]
-        public IHttpActionResult PostGuideLocation(int guideId, LocationWrapper location)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            GuideLocation gl = new GuideLocation();
-            gl.guideId = guideId;
-            gl.cityServed = location.location;
-
-            //get the geocode from google api
-            Geocoder gCoder = new Geocoder();
-            Geocode gc = gCoder.GetGeocode(location.location);
-            if (gc == null)
-            {                
-                return BadRequest("Could not find a valid geocode for the location specified "+location.location);
-            }
-
-            //now insert into the database
-            gl.longitude = Convert.ToDouble(gc.latitude);
-            gl.latitude = Convert.ToDouble(gc.longitude);
-
-            db.GuideLocations.Add(gl);
-            db.SaveChanges();
-
-            return Ok(gl);
-        }
-
-        // POST: api/Guides
-        [ResponseType(typeof(GuideProfile))]
-        public IHttpActionResult PostGuideProfile(Guide guide)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            GuideProfile guideProfile = new GuideProfile();
-            guideProfile.username = guide.username;
-            guideProfile.firstName = guide.fName;
-            guideProfile.lastName = guide.lName;
-            guideProfile.guideId = 0;
-            guideProfile.address1 = guide.address1;
-            guideProfile.address2 = guide.address2;
-            guideProfile.description = guide.description;
-            guideProfile.profileImage = guide.profileImage;
-
-            db.GuideProfiles.Add(guideProfile);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = guideProfile.guideId }, guideProfile);
-        }
+ 
 
         // DELETE: api/Guides/5
         [ResponseType(typeof(GuideProfile))]

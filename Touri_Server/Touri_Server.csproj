@@ -208,6 +208,7 @@
     <Compile Include="Controllers\GuidesController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
+    <Compile Include="Controllers\MyGuideProfileController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\APIModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
