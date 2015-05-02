@@ -18,10 +18,6 @@ namespace Touri_Server.Controllers
     public class GuidesController : ApiController
     {
         private NativusDBEntities db = new NativusDBEntities();
-        private static string GEOCODE_API_BASE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-        private static string TYPE_AUTOCOMPLETE = "/autocomplete";
-        private static string OUT_JSON = "/json";
-        private static string API_KEY = "AIzaSyDPRsZJ3iQcO8PdUU1yCjFAKA7etzg7PPM";
 
         // GET: api/Guides
         [Route("api/guides/search")]
@@ -73,7 +69,6 @@ namespace Touri_Server.Controllers
                 {
                     continue;
                 }
-
     
                 //then do a proximity search
                 Double latitude = Convert.ToDouble(gc.latitude);
@@ -167,6 +162,7 @@ namespace Touri_Server.Controllers
         [ResponseType(typeof(GuideProfile))]
         public Guide GetGuideProfile(String username)
         {
+            var identity = User.Identity;
 
            // GuideProfile guideProfile = db.GuideProfiles.Find(id);
             var guide = (from guides in db.GuideProfiles                                                    
@@ -273,8 +269,18 @@ namespace Touri_Server.Controllers
             GuideLocation gl = new GuideLocation();
             gl.guideId = guideId;
             gl.cityServed = location.location;
-            gl.longitude = location.longitude;
-            gl.latitude = location.latitude;
+
+            //get the geocode from google api
+            Geocoder gCoder = new Geocoder();
+            Geocode gc = gCoder.GetGeocode(location.location);
+            if (gc == null)
+            {                
+                return BadRequest("Could not find a valid geocode for the location specified "+location.location);
+            }
+
+            //now insert into the database
+            gl.longitude = Convert.ToDouble(gc.latitude);
+            gl.latitude = Convert.ToDouble(gc.longitude);
 
             db.GuideLocations.Add(gl);
             db.SaveChanges();
