@@ -2,7 +2,6 @@
 <Schema Namespace="NativusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="NativusDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attributes" EntityType="NativusDBModel.Attribute" />
-    <EntitySet Name="Connections" EntityType="NativusDBModel.Connection" />
     <EntitySet Name="Expertises" EntityType="NativusDBModel.Expertise" />
     <EntitySet Name="Fluencies" EntityType="NativusDBModel.Fluency" />
     <EntitySet Name="GuideExpertises" EntityType="NativusDBModel.GuideExpertises" />
@@ -54,6 +53,7 @@
       <End Role="Review" EntitySet="Reviews" />
       <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
     </AssociationSet>
+    <EntitySet Name="Connections" EntityType="NativusDBModel.Connection" />
   </EntityContainer>
   <EntityType Name="Attribute">
     <Key>
@@ -63,15 +63,6 @@
     <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="AttributeDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ReviewedAttributes" Relationship="NativusDBModel.FK_ReviewedAttributes_Attribute" FromRole="Attribute" ToRole="ReviewedAttribute" />
-  </EntityType>
-  <EntityType Name="Connection">
-    <Key>
-      <PropertyRef Name="connectionId" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="connectionId" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-    <Property Name="lastConnected" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="Expertise">
     <Key>
@@ -319,4 +310,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Connection">
+    <Key>
+      <PropertyRef Name="connectionId" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="connectionId" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="lastConnected" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
 </Schema>

@@ -26,7 +26,6 @@ namespace Touri_Server.Models
         }
     
         public virtual DbSet<Attribute> Attributes { get; set; }
-        public virtual DbSet<Connection> Connections { get; set; }
         public virtual DbSet<Expertise> Expertises { get; set; }
         public virtual DbSet<Fluency> Fluencies { get; set; }
         public virtual DbSet<GuideExpertises> GuideExpertises { get; set; }
@@ -38,5 +37,6 @@ namespace Touri_Server.Models
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<TouriImage> TouriImages { get; set; }
         public virtual DbSet<TravellerProfile> TravellerProfiles { get; set; }
+        public virtual DbSet<Connection> Connections { get; set; }
     }
 }

@@ -10,16 +10,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Connections">
-      <EntityTypeMapping TypeName="NativusDBModel.Connection">
-        <MappingFragment StoreEntitySet="Connections">
-          <ScalarProperty Name="lastConnected" ColumnName="lastConnected" />
-          <ScalarProperty Name="connectionId" ColumnName="connectionId" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Expertises">
       <EntityTypeMapping TypeName="NativusDBModel.Expertise">
         <MappingFragment StoreEntitySet="Expertises">
@@ -135,6 +125,16 @@
           <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="travellerId" ColumnName="travellerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Connections">
+      <EntityTypeMapping TypeName="NativusDBModel.Connection">
+        <MappingFragment StoreEntitySet="Connections">
+          <ScalarProperty Name="lastConnected" ColumnName="lastConnected" />
+          <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
