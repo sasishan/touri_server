@@ -106,7 +106,7 @@ namespace Touri_Server.Hubs
             GuideProfile gp = db.GuideProfiles.Find(tgtId);
 
             var connection = (from cons in db.Connections
-                              where cons.username == fromUsername
+                              where cons.username == gp.username
                               select cons);
             
             if (connection==null)
@@ -115,8 +115,11 @@ namespace Touri_Server.Hubs
                 //Clients.All.messageReceived(fromUsername, "Message not delivered. This user is not online");
                 return;
             }
-            Connection c = connection.First<Connection>();
-            Clients.Group(c.username).messageReceived(fromUsername, message);
+            else
+            {
+                Connection c = connection.First<Connection>();
+                Clients.Group(c.username).messageReceived(fromUsername, message);
+            }
 
             //Clients.All.messageReceived(platform, message);
             //Clients.All.addNewMessageToPage(platform, message);
