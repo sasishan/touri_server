@@ -17,7 +17,7 @@ namespace Touri_Server.Hubs
         public override Task OnConnected()
         {
             var username = Context.QueryString["username"];
-            var targetGuideId = Context.QueryString["targetGuideId"];
+            var targetUsername = Context.QueryString["targetUserName"];
             Random r = new Random();
 
             //add the user to the connected DB
@@ -100,13 +100,13 @@ namespace Touri_Server.Hubs
             }
         }
 
-        public void SendPrivateMessage(string message, string fromUsername, string targetId)
+        public void SendPrivateMessage(string message, string fromUsername, string targetUsername)
         {
-            int tgtId = Convert.ToInt32(targetId);
-            GuideProfile gp = db.GuideProfiles.Find(tgtId);
+           // int tgtId = Convert.ToInt32(targetId);
+         //   GuideProfile gp = db.GuideProfiles.Find(tgtId);
 
             var connection = (from cons in db.Connections
-                              where cons.username == gp.username
+                              where cons.username == targetUsername
                               select cons);
             
             if (connection==null)
@@ -117,8 +117,8 @@ namespace Touri_Server.Hubs
             }
             else
             {
-                Connection c = connection.First<Connection>();
-                Clients.Group(c.username).messageReceived(fromUsername, message);
+                //Connection c = connection.First<Connection>();
+                Clients.Group(targetUsername).messageReceived(fromUsername, message);
             }
 
             //Clients.All.messageReceived(platform, message);

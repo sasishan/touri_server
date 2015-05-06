@@ -98,6 +98,12 @@ namespace Touri_Server.Controllers
                 expertiseList.Add(newExp);
             }
 
+            expertiseList.Sort(
+                delegate (Expertise_object e1, Expertise_object e2)
+                {
+                    return e2.numberOfGuides.CompareTo(e1.numberOfGuides);                    
+                }
+            );
             return expertiseList;
         }
 
