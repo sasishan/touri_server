@@ -10,11 +10,11 @@
   </EntityType>
   <EntityType Name="Connections">
     <Key>
-      <PropertyRef Name="connectionId" />
+      <PropertyRef Name="username" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="username" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="connectionId" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="connectionId" Type="nvarchar" MaxLength="400" />
     <Property Name="lastConnected" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Expertises">

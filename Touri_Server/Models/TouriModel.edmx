@@ -15,11 +15,11 @@
         </EntityType>
         <EntityType Name="Connections">
           <Key>
-            <PropertyRef Name="connectionId" />
+            <PropertyRef Name="username" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="connectionId" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="connectionId" Type="nvarchar" MaxLength="400" />
           <Property Name="lastConnected" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Expertises">
@@ -620,11 +620,11 @@
         </Association>
         <EntityType Name="Connection">
           <Key>
-            <PropertyRef Name="connectionId" />
+            <PropertyRef Name="username" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="connectionId" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="connectionId" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="lastConnected" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         </Schema>

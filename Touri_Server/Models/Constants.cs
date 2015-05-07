@@ -23,6 +23,7 @@ namespace Touri_Server.Models
 
     public class Converter
     {
+        NativusDBEntities db = new NativusDBEntities();
         public Guide convertToGuide(GuideProfile guideProfile)
         {
             Guide g = new Guide();
@@ -34,7 +35,17 @@ namespace Touri_Server.Models
             g.address1 = guideProfile.address1;
             g.address2 = guideProfile.address2;
             g.description = guideProfile.description;
-            g.availability = 0; //@todo
+
+            int countCons = (int) (from cons in db.Connections
+                             where (cons.username == g.username)
+                             select cons).Count();
+            
+            g.availability = 0;
+            if (countCons>0)
+            {
+                g.availability = 1;                
+            }            
+            
             g.profileImage = guideProfile.profileImage;
 
             foreach (GuideLanguage l in guideProfile.GuideLanguages)

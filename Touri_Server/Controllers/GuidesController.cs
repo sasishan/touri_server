@@ -18,6 +18,7 @@ namespace Touri_Server.Controllers
     public class GuidesController : ApiController
     {
         private NativusDBEntities db = new NativusDBEntities();
+        Converter converter = new Converter();
 
         // GET: api/Guides
         [Route("api/guides/search")]
@@ -123,7 +124,7 @@ namespace Touri_Server.Controllers
             List<Guide> guideList = new List<Guide>();
             foreach (GuideProfile gp in queryProfiles)
             {
-                Guide g = convertToGuide(gp);
+                Guide g = converter.convertToGuide(gp);
                 guideList.Add(g);
             }
             return guideList;
@@ -137,7 +138,7 @@ namespace Touri_Server.Controllers
 
             foreach (GuideProfile gp in guideProfileList)
             {
-                Guide g = convertToGuide(gp);
+                Guide g = converter.convertToGuide(gp);
                 guideList.Add(g);
             }
             return guideList;
@@ -154,7 +155,7 @@ namespace Touri_Server.Controllers
                 return null;
             }
 
-            Guide g = convertToGuide(guideProfile);
+            Guide g = converter.convertToGuide(guideProfile);
             return g;
         }
 
@@ -176,7 +177,7 @@ namespace Touri_Server.Controllers
             }
 
 
-            Guide g = convertToGuide(guide.First<GuideProfile>());
+            Guide g = converter.convertToGuide(guide.First<GuideProfile>());
             return g;
         }
 
@@ -279,7 +280,18 @@ namespace Touri_Server.Controllers
             g.address1 = guideProfile.address1;
             g.address2 = guideProfile.address2;
             g.description = guideProfile.description;
-            g.availability = 0; //@todo
+
+            int countCons = (int) (from cons in db.Connections
+                             where (cons.username == g.username)
+                             select cons).Count();
+            
+            g.availability = 0;
+            if (countCons>0)
+            {
+                g.availability = 1;                
+            }
+
+        
             g.profileImage = guideProfile.profileImage;
             
             foreach (GuideLanguage l in guideProfile.GuideLanguages)

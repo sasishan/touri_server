@@ -43,24 +43,36 @@ namespace Touri_Server.Hubs
                     tries++;
                 }
             }
-
             //create a group chat using their username
             Groups.Add(Context.ConnectionId, username);
 
-            c.username = username;
-            c.connectionId = Context.ConnectionId;
-            c.lastConnected = DateTime.Now;
-            
-            db.Connections.Add(c);
-                                   
+         //   c.username = username;
+          //  c.connectionId = Context.ConnectionId;
+          //  c.lastConnected = DateTime.Now;
+           // db.Connections.Add(c);
+
+            Connection connectRec = db.Connections.Find(username);
+            if (connectRec==null)
+            {
+                c.username = username;
+                c.connectionId = Context.ConnectionId;
+                c.lastConnected = DateTime.Now;
+                db.Connections.Add(c);
+            }
+            else
+            {
+                connectRec.connectionId = Context.ConnectionId;
+                connectRec.lastConnected = DateTime.Now;
+            }
             db.SaveChanges();
          
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
-        {                        
-            Connection c = db.Connections.Find(Context.ConnectionId);
+        {
+            var username = Context.QueryString["username"];
+            Connection c = db.Connections.Find(username);
 
             if (c!=null)
             {
@@ -73,10 +85,23 @@ namespace Touri_Server.Hubs
 
         public override Task OnReconnected()
         {
-            // Add your own code here.
-            // For example: in a chat application, you might have marked the
-            // user as offline after a period of inactivity; in that case 
-            // mark the user as online again.
+            var username = Context.QueryString["username"];
+            Connection connectRec = db.Connections.Find(username);
+            
+            if (connectRec == null)
+            {
+                Connection c = new Connection();
+                c.username = username;
+                c.connectionId = Context.ConnectionId;
+                c.lastConnected = DateTime.Now;
+                db.Connections.Add(c);
+            }
+            else
+            {
+                connectRec.connectionId = Context.ConnectionId;
+                connectRec.lastConnected = DateTime.Now;
+            }
+            db.SaveChanges();
             return base.OnReconnected();
         }
 
@@ -105,24 +130,17 @@ namespace Touri_Server.Hubs
            // int tgtId = Convert.ToInt32(targetId);
          //   GuideProfile gp = db.GuideProfiles.Find(tgtId);
 
-            var connection = (from cons in db.Connections
-                              where cons.username == targetUsername
-                              select cons);
-            
-            if (connection==null)
+            Connection conn = db.Connections.Find(targetUsername);
+
+            if (conn==null)
             {
                 Clients.Group(fromUsername).messageReceived(fromUsername, "Message not delivered. This user is not online");
-                //Clients.All.messageReceived(fromUsername, "Message not delivered. This user is not online");
                 return;
             }
             else
             {
-                //Connection c = connection.First<Connection>();
                 Clients.Group(targetUsername).messageReceived(fromUsername, message);
             }
-
-            //Clients.All.messageReceived(platform, message);
-            //Clients.All.addNewMessageToPage(platform, message);
         }
 
         public void Send(string platform, string message)
