@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml.Linq;
 
 namespace Touri_Server.Models
@@ -19,8 +21,49 @@ namespace Touri_Server.Models
         public static int WithinDistanceDefaultInKM = 50;
         public static int DefaultImageId = 1;
 
+        public static string IMAGE_CATEGORY_GUIDE_PROFILE = "guide";
+        public static string IMAGE_CATEGORY_APPLICATION_EXPERTISE = "expertise";
+        public static string APPLICATION_USER= "default";
+        public static string IMAGE_PATH = "images";
+        public static string IMAGE_APPLICATION_DEFAULT_PATH = "images\application";
+
     }
 
+    public class TouriPaths
+    {
+        public string GetNewImageDirPath(String category, string username, string fileNameWithExtension)
+        {
+            string fullPath = null;
+            string fileName = Path.GetFileNameWithoutExtension(fileNameWithExtension);
+            string extension = Path.GetExtension(fileNameWithExtension);
+            fullPath = HttpContext.Current.Server.MapPath("~").ToString() + GetBaseImagePath(category) + "\\" + category + "\\" + username + "\\";// +fileName + extension;
+
+            return fullPath;
+        }
+
+        public string GetBaseImagePath(String category)
+        {
+            return Constants.IMAGE_PATH;
+        }
+
+
+        public string GetImagePathFromImageRecord(TouriImage img)
+        {
+            string fullPath;
+            if (img.path.Equals("images\\application"))
+            {
+                //special path to be used by the application only
+                //the path for images is: basepath/<category>/<filename>.<extension>
+                fullPath = HttpContext.Current.Server.MapPath("~").ToString() + img.path + "\\" + img.category + "\\" + img.filename + img.extension;
+            }
+            else
+            {
+                //the path for images is: basepath/<category>/<username>/<filename>.<extension>
+                fullPath = HttpContext.Current.Server.MapPath("~").ToString() + img.path + "\\" + img.category + "\\" + img.username + "\\" + img.filename + img.extension;
+            }
+            return (fullPath);
+        }
+    }
     public class Converter
     {
         NativusDBEntities db = new NativusDBEntities();

@@ -67,6 +67,17 @@ namespace Touri_Server.Models
         }
     }
 
+    public class GuideNames
+    {
+        public string fName { get; set; }
+        public string lName { get; set; }
+
+        public GuideNames()
+        {
+            // keep for serializable
+        }
+    }
+
     public class LanguageWrapper
     {
         public int languageId { get; set; }

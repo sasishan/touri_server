@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Touri_Server.Models;
@@ -63,6 +65,76 @@ namespace Touri_Server.Controllers
 
             Guide g = converter.convertToGuide(guide.First<GuideProfile>());
             return g;
+        }
+
+        // POST: api/Guides/<id>/expertise/<expertise>
+        [Route("api/MyGuideProfile/{guideid}/profileImage/")]
+        [ResponseType(typeof(GuideProfile))]
+        [HttpPost]
+        public HttpResponseMessage PostProfileImage(int guideId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            string requestor = getGuideUsername(guideId);
+            if (!validRequestor(requestor))
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            GuideProfile guideProfile = db.GuideProfiles.Find(guideId);
+            if (guideProfile == null)
+            {
+                //error should not happen!
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+
+            TouriPaths tp = new TouriPaths();
+            if (httpRequest.Files.Count > 0)
+            {
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    if (!Path.GetExtension(postedFile.FileName).Equals(".jpg"))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
+                    }           
+                    var dirPath = tp.GetNewImageDirPath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE, requestor, postedFile.FileName);
+
+                    if (!Directory.Exists(dirPath))
+                    {
+                        Directory.CreateDirectory(dirPath);
+                    }
+                    
+                    postedFile.SaveAs(dirPath+"\\"+ postedFile.FileName);
+
+                    TouriImage ti = new TouriImage();
+                    ti.filename = Path.GetFileNameWithoutExtension(postedFile.FileName);
+                    ti.extension = Path.GetExtension(postedFile.FileName);
+                    ti.category = Constants.IMAGE_CATEGORY_GUIDE_PROFILE;
+                    ti.dateuploaded = DateTime.Now;
+                    ti.path = tp.GetBaseImagePath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE);
+                    ti.username = requestor;
+
+                    db.TouriImages.Add(ti);
+                    db.SaveChanges();
+
+                    guideProfile.profileImage = ti.id;
+                    db.SaveChanges();
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            return result;
         }
 
         // POST: api/Guides/<id>/expertise/<expertise>

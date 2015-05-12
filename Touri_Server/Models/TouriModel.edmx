@@ -80,6 +80,13 @@
           <Property Name="description" Type="nvarchar(max)" />
           <Property Name="profileImage" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="GuideProfileImages">
+          <Key>
+            <PropertyRef Name="guideId" />
+          </Key>
+          <Property Name="guideId" Type="int" Nullable="false" />
+          <Property Name="imageId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Languages">
           <Key>
             <PropertyRef Name="LanguageId" />
@@ -258,6 +265,7 @@
           <EntitySet Name="GuideLanguages" EntityType="Self.GuideLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuideLocations" EntityType="Self.GuideLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuideProfile" EntityType="Self.GuideProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuideProfileImages" EntityType="Self.GuideProfileImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReviewedAttributes" EntityType="Self.ReviewedAttributes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
@@ -362,6 +370,7 @@
             <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
           </AssociationSet>
           <EntitySet Name="Connections" EntityType="NativusDBModel.Connection" />
+          <EntitySet Name="GuideProfileImages" EntityType="NativusDBModel.GuideProfileImage" />
         </EntityContainer>
         <EntityType Name="Attribute">
           <Key>
@@ -627,6 +636,13 @@
           <Property Name="connectionId" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="lastConnected" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="GuideProfileImage">
+          <Key>
+            <PropertyRef Name="guideId" />
+          </Key>
+          <Property Name="guideId" Type="Int32" Nullable="false" />
+          <Property Name="imageId" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -767,6 +783,14 @@
                 <ScalarProperty Name="connectionId" ColumnName="connectionId" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuideProfileImages">
+            <EntityTypeMapping TypeName="NativusDBModel.GuideProfileImage">
+              <MappingFragment StoreEntitySet="GuideProfileImages">
+                <ScalarProperty Name="imageId" ColumnName="imageId" />
+                <ScalarProperty Name="guideId" ColumnName="guideId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

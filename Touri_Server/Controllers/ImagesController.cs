@@ -27,18 +27,8 @@ namespace WebApplicationMVC5.Controllers
 
             string fullPath = "";
 
-            if (img.path.Equals("images\\application"))
-            {
-                //special path to be used by the application only
-                //the path for images is: basepath/<category>/<filename>.<extension>
-                fullPath = HttpContext.Current.Server.MapPath("~").ToString() + img.path + "\\" + img.category + "\\" + img.filename + img.extension;
-            }
-            else
-            {
-                //the path for images is: basepath/<category>/<username>/<filename>.<extension>
-                fullPath = HttpContext.Current.Server.MapPath("~").ToString() + img.path + "\\" + img.category + "\\" + img.username + "\\" + img.filename + img.extension;
-            }
-
+            TouriPaths tp = new TouriPaths();
+            fullPath = tp.GetImagePathFromImageRecord(img);
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StreamContent(new FileStream(fullPath, FileMode.Open, FileAccess.Read));

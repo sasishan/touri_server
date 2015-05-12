@@ -38,5 +38,6 @@ namespace Touri_Server.Models
         public virtual DbSet<TouriImage> TouriImages { get; set; }
         public virtual DbSet<TravellerProfile> TravellerProfiles { get; set; }
         public virtual DbSet<Connection> Connections { get; set; }
+        public virtual DbSet<GuideProfileImage> GuideProfileImages { get; set; }
     }
 }
