@@ -54,6 +54,7 @@
       <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
     </AssociationSet>
     <EntitySet Name="Connections" EntityType="NativusDBModel.Connection" />
+    <EntitySet Name="GuideProfileImages" EntityType="NativusDBModel.GuideProfileImage" />
   </EntityContainer>
   <EntityType Name="Attribute">
     <Key>
@@ -318,5 +319,12 @@
     <Property Name="username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="connectionId" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
     <Property Name="lastConnected" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="GuideProfileImage">
+    <Key>
+      <PropertyRef Name="guideId" />
+    </Key>
+    <Property Name="guideId" Type="Int32" Nullable="false" />
+    <Property Name="imageId" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

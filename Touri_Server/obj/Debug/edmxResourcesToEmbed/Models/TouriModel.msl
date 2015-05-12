@@ -138,5 +138,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GuideProfileImages">
+      <EntityTypeMapping TypeName="NativusDBModel.GuideProfileImage">
+        <MappingFragment StoreEntitySet="GuideProfileImages">
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
+          <ScalarProperty Name="guideId" ColumnName="guideId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

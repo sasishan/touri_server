@@ -75,6 +75,13 @@
     <Property Name="description" Type="nvarchar(max)" />
     <Property Name="profileImage" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="GuideProfileImages">
+    <Key>
+      <PropertyRef Name="guideId" />
+    </Key>
+    <Property Name="guideId" Type="int" Nullable="false" />
+    <Property Name="imageId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Languages">
     <Key>
       <PropertyRef Name="LanguageId" />
@@ -253,6 +260,7 @@
     <EntitySet Name="GuideLanguages" EntityType="Self.GuideLanguages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GuideLocations" EntityType="Self.GuideLocations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GuideProfile" EntityType="Self.GuideProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GuideProfileImages" EntityType="Self.GuideProfileImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReviewedAttributes" EntityType="Self.ReviewedAttributes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
