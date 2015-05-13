@@ -171,6 +171,36 @@ namespace Touri_Server.Controllers
         }
 
         // POST: api/Guides/<id>/name/<first name, last name>
+        [Route("api/MyGuideProfile/{guideid}/description/")]
+        [ResponseType(typeof(GuideProfile))]
+        [HttpPost]
+        public IHttpActionResult PostGuideDescription(int guideId, Guide guide)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string requestor = getGuideUsername(guideId);
+            if (!validRequestor(requestor))
+            {
+                return BadRequest("Unauthorized requestor");
+            }
+
+            GuideProfile gp = db.GuideProfiles.Find(guideId);
+            if (gp == null)
+            {
+                return BadRequest("Could not fine guide");
+            }
+
+            gp.description = guide.description;
+            db.SaveChanges();
+
+            return Ok("Description updated");
+        }
+
+
+        // POST: api/Guides/<id>/name/<first name, last name>
         [Route("api/MyGuideProfile/{guideid}/name/")]
         [ResponseType(typeof(GuideProfile))]
         [HttpPost]
@@ -303,6 +333,7 @@ namespace Touri_Server.Controllers
             guideProfile.address1 = ((guide.address1 == null) ? "" : guide.address1);
             guideProfile.address2 = ((guide.address2 == null) ? "" : guide.address2);
             guideProfile.description = ((guide.description == null) ? "" : guide.description);
+            guideProfile.summary = ((guide.summary == null) ? "" : guide.summary);
             guideProfile.profileImage = guide.profileImage;
 
             db.GuideProfiles.Add(guideProfile);

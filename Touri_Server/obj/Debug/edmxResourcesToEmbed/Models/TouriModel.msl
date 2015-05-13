@@ -10,6 +10,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Connections">
+      <EntityTypeMapping TypeName="NativusDBModel.Connection">
+        <MappingFragment StoreEntitySet="Connections">
+          <ScalarProperty Name="lastConnected" ColumnName="lastConnected" />
+          <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Expertises">
       <EntityTypeMapping TypeName="NativusDBModel.Expertise">
         <MappingFragment StoreEntitySet="Expertises">
@@ -62,6 +72,7 @@
     <EntitySetMapping Name="GuideProfiles">
       <EntityTypeMapping TypeName="NativusDBModel.GuideProfile">
         <MappingFragment StoreEntitySet="GuideProfile">
+          <ScalarProperty Name="summary" ColumnName="summary" />
           <ScalarProperty Name="profileImage" ColumnName="profileImage" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="address2" ColumnName="address2" />
@@ -70,6 +81,14 @@
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="guideId" ColumnName="guideId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuideProfileImages">
+      <EntityTypeMapping TypeName="NativusDBModel.GuideProfileImage">
+        <MappingFragment StoreEntitySet="GuideProfileImages">
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
           <ScalarProperty Name="guideId" ColumnName="guideId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -125,24 +144,6 @@
           <ScalarProperty Name="firstName" ColumnName="firstName" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="travellerId" ColumnName="travellerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Connections">
-      <EntityTypeMapping TypeName="NativusDBModel.Connection">
-        <MappingFragment StoreEntitySet="Connections">
-          <ScalarProperty Name="lastConnected" ColumnName="lastConnected" />
-          <ScalarProperty Name="connectionId" ColumnName="connectionId" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GuideProfileImages">
-      <EntityTypeMapping TypeName="NativusDBModel.GuideProfileImage">
-        <MappingFragment StoreEntitySet="GuideProfileImages">
-          <ScalarProperty Name="imageId" ColumnName="imageId" />
-          <ScalarProperty Name="guideId" ColumnName="guideId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -52,6 +52,7 @@ namespace Touri_Server.Models
         public string address2 { get; set; }
         public string phone { get; set; }
         public string description { get; set; }
+        public string summary { get; set; }
         public int availability { get; set; }
         public int profileImage { get; set; }
         public List<LanguageWrapper> languages { get; set; }

@@ -5,18 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="501f4427453c4860890a9159e34e38cb" Name="Diagram1">
-        <EntityTypeShape EntityType="NativusDBModel.Attribute" Width="1.5" PointX="5.25" PointY="16.5" />
-        <EntityTypeShape EntityType="NativusDBModel.Expertise" Width="1.5" PointX="3" PointY="2.125" />
-        <EntityTypeShape EntityType="NativusDBModel.Fluency" Width="1.5" PointX="3" PointY="10" />
-        <EntityTypeShape EntityType="NativusDBModel.GuideExpertises" Width="1.5" PointX="5.25" PointY="3.125" />
-        <EntityTypeShape EntityType="NativusDBModel.GuideLanguage" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="NativusDBModel.Attribute" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="NativusDBModel.Connection" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NativusDBModel.Expertise" Width="1.5" PointX="6" PointY="17.125" />
+        <EntityTypeShape EntityType="NativusDBModel.Fluency" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="NativusDBModel.GuideExpertises" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="NativusDBModel.GuideLanguage" Width="1.5" PointX="5.25" PointY="7.875" />
         <EntityTypeShape EntityType="NativusDBModel.GuideLocation" Width="1.5" PointX="5.25" PointY="13.5" />
-        <EntityTypeShape EntityType="NativusDBModel.GuideProfile" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="NativusDBModel.Language" Width="1.5" PointX="3" PointY="12.5" />
-        <EntityTypeShape EntityType="NativusDBModel.ReviewedAttribute" Width="1.5" PointX="7.5" PointY="10.375" />
-        <EntityTypeShape EntityType="NativusDBModel.Review" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="NativusDBModel.GuideProfile" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="NativusDBModel.GuideProfileImage" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NativusDBModel.Language" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="NativusDBModel.ReviewedAttribute" Width="1.5" PointX="7.5" PointY="4.5" />
+        <EntityTypeShape EntityType="NativusDBModel.Review" Width="1.5" PointX="5.25" PointY="4.375" />
         <EntityTypeShape EntityType="NativusDBModel.TouriImage" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="NativusDBModel.TravellerProfile" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="NativusDBModel.TravellerProfile" Width="1.5" PointX="9.75" PointY="0.75" />
         <AssociationConnector Association="NativusDBModel.FK_ReviewedAttributes_Attribute" />
         <AssociationConnector Association="NativusDBModel.FK_GuideExpertises_Expertises" />
         <AssociationConnector Association="NativusDBModel.FK_GuideLanguages_Fluency" />
@@ -27,8 +29,6 @@
         <AssociationConnector Association="NativusDBModel.FK_GuideId" />
         <AssociationConnector Association="NativusDBModel.FK_GuideProfile_Images" />
         <AssociationConnector Association="NativusDBModel.FK_ReviewedAttributes_Review" />
-        <EntityTypeShape EntityType="NativusDBModel.Connection" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="NativusDBModel.GuideProfileImage" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

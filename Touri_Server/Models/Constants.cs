@@ -78,6 +78,7 @@ namespace Touri_Server.Models
             g.address1 = guideProfile.address1;
             g.address2 = guideProfile.address2;
             g.description = guideProfile.description;
+            g.summary = guideProfile.summary;
 
             int countCons = (int) (from cons in db.Connections
                              where (cons.username == g.username)

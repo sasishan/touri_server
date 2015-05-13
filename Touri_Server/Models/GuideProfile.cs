@@ -31,6 +31,7 @@ namespace Touri_Server.Models
         public string address2 { get; set; }
         public string description { get; set; }
         public int profileImage { get; set; }
+        public string summary { get; set; }
     
         public virtual ICollection<GuideExpertises> GuideExpertises { get; set; }
         public virtual ICollection<GuideLanguage> GuideLanguages { get; set; }

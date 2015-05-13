@@ -74,6 +74,7 @@
     <Property Name="address2" Type="nvarchar" MaxLength="500" />
     <Property Name="description" Type="nvarchar(max)" />
     <Property Name="profileImage" Type="int" Nullable="false" />
+    <Property Name="summary" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="GuideProfileImages">
     <Key>
