@@ -114,6 +114,8 @@ namespace Touri_Server.Models
                 LocationWrapper lw = new LocationWrapper();
                 lw.locationId = n.id;
                 lw.location = n.cityServed;
+                lw.latitude = n.latitude;
+                lw.longitude = n.longitude;
                 g.locationsServed.Add(lw);
             }
 
