@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using Touri_Server.Models;
 using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
 
 namespace Touri_Server.Hubs
 {
@@ -77,7 +78,20 @@ namespace Touri_Server.Hubs
             if (c!=null)
             {
                 db.Connections.Remove(c);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException E)
+                {
+                    //Safely ignore this exception
+                }
+                catch (Exception e)
+                {
+                    //Something else has occurred
+                    throw;
+                }
+                
             }
 
             return base.OnDisconnected(stopCalled);
