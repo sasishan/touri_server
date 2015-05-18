@@ -133,6 +133,10 @@ namespace Touri_Server.Models
 
         public Geocode GetGeocode(string address)
         {
+            if (address == null)
+            {
+                return null;
+            }
             var requestUri = string.Format(Constants.GEOCODE_API_BASE, Uri.EscapeDataString(address));
 
             var request = WebRequest.Create(requestUri);
