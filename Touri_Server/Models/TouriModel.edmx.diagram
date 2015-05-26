@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="501f4427453c4860890a9159e34e38cb" Name="Diagram1">
         <EntityTypeShape EntityType="NativusDBModel.Attribute" Width="1.5" PointX="5.25" PointY="1.75" />
-        <EntityTypeShape EntityType="NativusDBModel.Connection" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NativusDBModel.Connection" Width="1.5" PointX="2.875" PointY="1.125" />
         <EntityTypeShape EntityType="NativusDBModel.Expertise" Width="1.5" PointX="6" PointY="17.125" />
         <EntityTypeShape EntityType="NativusDBModel.Fluency" Width="1.5" PointX="3" PointY="12.375" />
         <EntityTypeShape EntityType="NativusDBModel.GuideExpertises" Width="1.5" PointX="8.25" PointY="8.125" />
@@ -29,6 +29,7 @@
         <AssociationConnector Association="NativusDBModel.FK_GuideId" />
         <AssociationConnector Association="NativusDBModel.FK_GuideProfile_Images" />
         <AssociationConnector Association="NativusDBModel.FK_ReviewedAttributes_Review" />
+        <EntityTypeShape EntityType="NativusDBModel.Message" Width="1.5" PointX="10.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

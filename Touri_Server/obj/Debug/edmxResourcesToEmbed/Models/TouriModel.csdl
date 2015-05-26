@@ -55,6 +55,7 @@
       <End Role="Review" EntitySet="Reviews" />
       <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
     </AssociationSet>
+    <EntitySet Name="Messages" EntityType="NativusDBModel.Message" />
   </EntityContainer>
   <EntityType Name="Attribute">
     <Key>
@@ -328,4 +329,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="toUser" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="fromUser" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="message1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Downloaded" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="LastDownloaded" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

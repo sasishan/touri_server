@@ -67,6 +67,19 @@ namespace Touri_Server.Models
     public class Converter
     {
         NativusDBEntities db = new NativusDBEntities();
+
+        public ChatMessage convertToChatMessage(Message msg)
+        {
+            ChatMessage cm = new ChatMessage();
+            cm.id = msg.id;
+            cm.message = msg.message1;
+            cm.fromUser = msg.fromUser;
+            cm.toUser = msg.toUser;
+            cm.timeStamp = msg.Timestamp.ToString();
+            
+            return cm;
+        }
+
         public Guide convertToGuide(GuideProfile guideProfile)
         {
             Guide g = new Guide();

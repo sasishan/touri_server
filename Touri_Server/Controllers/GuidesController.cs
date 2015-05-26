@@ -269,58 +269,5 @@ namespace Touri_Server.Controllers
             return db.GuideProfiles.Count(e => e.guideId == id) > 0;
         }
 
-        private Guide convertToGuide(GuideProfile guideProfile)
-        {
-            Guide g = new Guide();
-
-            g.username = guideProfile.username;
-            g.fName = guideProfile.firstName;
-            g.lName = guideProfile.lastName;
-            g.guideId = guideProfile.guideId;
-            g.address1 = guideProfile.address1;
-            g.address2 = guideProfile.address2;
-            g.description = guideProfile.description;
-
-            int countCons = (int) (from cons in db.Connections
-                             where (cons.username == g.username)
-                             select cons).Count();
-            
-            g.availability = 0;
-            if (countCons>0)
-            {
-                g.availability = 1;                
-            }
-
-        
-            g.profileImage = guideProfile.profileImage;
-            
-            foreach (GuideLanguage l in guideProfile.GuideLanguages)
-            {
-                LanguageWrapper lw = new LanguageWrapper();
-                lw.languageId = l.languageId;
-                lw.language = l.Language.Language1;
-                lw.fluency = l.Fluency1.fluency1;
-                g.languages.Add(lw);
-            }
-
-            foreach (GuideExpertises e in guideProfile.GuideExpertises)
-            {
-                ExpertiseWrapper ew = new ExpertiseWrapper();
-                ew.expertiseId = e.expertiseId;
-                ew.expertise = e.Expertise.expertise1;
-                g.expertises.Add(ew);
-            }
-
-            foreach (GuideLocation n in guideProfile.GuideLocations)
-            {
-                LocationWrapper lw = new LocationWrapper();
-                lw.locationId = n.id;
-                lw.location = n.cityServed;
-                g.locationsServed.Add(lw);
-            }
-
-            return g;
-        }
-
     }
 }

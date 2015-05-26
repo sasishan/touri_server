@@ -148,7 +148,15 @@ namespace Touri_Server.Hubs
 
             if (conn==null)
             {
-                Clients.Group(fromUsername).messageReceived(fromUsername, "Message not delivered. This user is not online");
+                Message m = new Message();
+                m.toUser = targetUsername;
+                m.fromUser = fromUsername;
+                m.message1 = message;
+                m.Timestamp = DateTime.Today;
+                m.Downloaded = "N";
+                db.Messages.Add(m);
+                db.SaveChanges();
+              //  Clients.Group(fromUsername).messageReceived("Touri", "Message not delivered. This user is not online");
                 return;
             }
             else

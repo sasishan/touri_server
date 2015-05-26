@@ -12,6 +12,31 @@ namespace Touri_Server.Models
         public string address { get; set; }
     }
 
+
+    public class ChatMessage
+    {
+        public int id { get; set; }
+        public string fromUser { get; set; }
+        public string toUser { get; set; }
+        public string message { get; set; }
+        public string timeStamp { get; set; }
+        public string downloaded { get; set; }
+        public string lastDownloaded { get; set; }
+
+        public void setDownloaded()
+        {
+            downloaded = "Y";
+            lastDownloaded = DateTime.Now.ToString();
+        }
+
+        public void setNotDownloaded()
+        {
+            downloaded = "N";
+            lastDownloaded = "";
+        }
+    }
+
+
     public class SearchGuideCriteria
     {
         public int guideId { get; set; }

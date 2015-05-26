@@ -90,6 +90,18 @@
     <Property Name="LanguageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="toUser" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fromUser" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Downloaded" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="LastDownloaded" Type="datetime" />
+  </EntityType>
   <EntityType Name="ReviewedAttributes">
     <Key>
       <PropertyRef Name="ReviewId" />
@@ -263,6 +275,7 @@
     <EntitySet Name="GuideProfile" EntityType="Self.GuideProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GuideProfileImages" EntityType="Self.GuideProfileImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReviewedAttributes" EntityType="Self.ReviewedAttributes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TouriImages" EntityType="Self.TouriImages" Schema="dbo" store:Type="Tables" />
