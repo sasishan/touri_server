@@ -52,20 +52,29 @@ namespace Touri_Server.Hubs
           //  c.lastConnected = DateTime.Now;
            // db.Connections.Add(c);
 
-            Connection connectRec = db.Connections.Find(username);
-            if (connectRec==null)
+            try
             {
-                c.username = username;
-                c.connectionId = Context.ConnectionId;
-                c.lastConnected = DateTime.Now;
-                db.Connections.Add(c);
+                Connection connectRec = db.Connections.Find(username);
+                if (connectRec == null)
+                {
+                    c.username = username;
+                    c.connectionId = Context.ConnectionId;
+                    c.lastConnected = DateTime.Now;
+                    db.Connections.Add(c);
+                }
+                else
+                {
+                    connectRec.connectionId = Context.ConnectionId;
+                    connectRec.lastConnected = DateTime.Now;
+                }
+                db.SaveChanges();
             }
-            else
+            catch (Exception e)
             {
-                connectRec.connectionId = Context.ConnectionId;
-                connectRec.lastConnected = DateTime.Now;
+                //do nothing
             }
-            db.SaveChanges();
+
+
          
             return base.OnConnected();
         }
