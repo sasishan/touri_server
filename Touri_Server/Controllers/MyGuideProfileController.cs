@@ -199,6 +199,34 @@ namespace Touri_Server.Controllers
             return Ok("Description updated");
         }
 
+        // POST: api/Guides/<id>/name/<first name, last name>
+        [Route("api/MyGuideProfile/{guideid}/summary/")]
+        [ResponseType(typeof(GuideProfile))]
+        [HttpPost]
+        public IHttpActionResult PostGuideSummary(int guideId, Guide guide)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string requestor = getGuideUsername(guideId);
+            if (!validRequestor(requestor))
+            {
+                return BadRequest("Unauthorized requestor");
+            }
+
+            GuideProfile gp = db.GuideProfiles.Find(guideId);
+            if (gp == null)
+            {
+                return BadRequest("Could not fine guide");
+            }
+
+            gp.summary = guide.summary;
+            db.SaveChanges();
+
+            return Ok("OK");
+        }
 
         // POST: api/Guides/<id>/name/<first name, last name>
         [Route("api/MyGuideProfile/{guideid}/name/")]
