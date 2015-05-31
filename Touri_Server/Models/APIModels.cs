@@ -116,6 +116,19 @@ namespace Touri_Server.Models
         }
     }
 
+    public class ListLocsLangs
+    {
+        public List<string> locs { get; set; }
+        public List<int> langIds { get; set; }
+        public List<int> expIds { get; set; }
+
+        public void StringLocsLangs()
+        {
+            // keep for serializable
+        }
+    }
+
+
     public class LocationWrapper
     {
         public int locationId { get; set; }

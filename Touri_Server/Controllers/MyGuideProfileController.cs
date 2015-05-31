@@ -230,6 +230,103 @@ namespace Touri_Server.Controllers
             return Ok("Name updated");
         }
 
+        // POST: api/Guides/<id>/language/<language>
+        [Route("api/MyGuideProfile/{guideid}/alllanguages/")]
+        [ResponseType(typeof(GuideProfile))]
+        [HttpPost]
+        public IHttpActionResult PostGuideLanguages(int guideId, ListLocsLangs data)
+        {
+            if (!ModelState.IsValid || data==null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string requestor = getGuideUsername(guideId);
+            if (!validRequestor(requestor))
+            {
+                return BadRequest("Unauthorized requestor");
+            }
+
+            //remove any language records, as we will re-write them all
+            var records =
+                from langs in db.GuideLanguages
+                where langs.guideId == guideId
+                select langs;
+
+            foreach (GuideLanguage gl in records)
+            {
+                db.GuideLanguages.Remove(gl);
+            }
+
+            foreach (int langId in data.langIds)
+            {
+                Language l = db.Languages.Find(langId);
+                if (l == null)
+                {
+                    return BadRequest("Language not found");
+                }
+
+                GuideLanguage gl = new GuideLanguage();
+                gl.guideId = guideId;
+                gl.languageId = langId;
+                gl.fluency = 4; //@todo
+
+                db.GuideLanguages.Add(gl);
+            }
+
+            db.SaveChanges();
+
+            return Ok("OK");
+        }
+
+        // POST: api/Guides/<id>/language/<language>
+        [Route("api/MyGuideProfile/{guideid}/allexpertises/")]
+        [ResponseType(typeof(GuideProfile))]
+        [HttpPost]
+        public IHttpActionResult PostGuideExpertises(int guideId, ListLocsLangs data)
+        {
+            if (!ModelState.IsValid || data == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string requestor = getGuideUsername(guideId);
+            if (!validRequestor(requestor))
+            {
+                return BadRequest("Unauthorized requestor");
+            }
+
+            //remove any language records, as we will re-write them all
+            var records =
+                from exps in db.GuideExpertises
+                where exps.guideId == guideId
+                select exps;
+
+            foreach (GuideExpertises ge in records)
+            {
+                db.GuideExpertises.Remove(ge);
+            }
+
+            foreach (int expId in data.expIds)
+            {
+                Expertise exp = db.Expertises.Find(expId);
+                if (exp == null)
+                {
+                    return BadRequest("Expertise not found");
+                }
+
+                GuideExpertises ge = new GuideExpertises();
+                ge.guideId = guideId;
+                ge.expertiseId = expId;
+
+                db.GuideExpertises.Add(ge);
+            }
+
+            db.SaveChanges();
+
+            return Ok("OK");
+        }
+
 
         // POST: api/Guides/<id>/language/<language>
         [Route("api/MyGuideProfile/{guideid}/language/")]
@@ -262,7 +359,61 @@ namespace Touri_Server.Controllers
             db.GuideLanguages.Add(gl);
             db.SaveChanges();
 
-            return Ok("Language added");
+            return Ok("OK");
+        }
+
+        // POST: api/Guides/<id>/location/<location>
+        [Route("api/MyGuideProfile/{guideid}/alllocations/")]
+        [ResponseType(typeof(GuideProfile))]
+        public IHttpActionResult PostGuideLocations(int guideId, ListLocsLangs data)
+        {
+            if (!ModelState.IsValid || data == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string requestor = getGuideUsername(guideId);
+            if (!validRequestor(requestor))
+            {
+                return BadRequest("Unauthorized requestor");
+            }
+
+            //get the geocode from google api
+            Geocoder gCoder = new Geocoder();
+
+            //remove any location records, as we will re-write them all
+            var records =
+                from locs in db.GuideLocations
+                where locs.guideId == guideId
+                select locs;
+
+            foreach (GuideLocation gl in records)
+            {
+                db.GuideLocations.Remove(gl);
+            }
+
+            foreach (string location in data.locs)
+            {
+                GuideLocation gl = new GuideLocation();
+                gl.guideId = guideId;
+                gl.cityServed = location;
+
+                Geocode gc = gCoder.GetGeocode(location);
+                if (gc == null)
+                {
+                    return BadRequest("Could not find a valid geocode for the location specified " + location);
+                }
+
+                //now insert into the database
+                gl.longitude = Convert.ToDouble(gc.longitude);
+                gl.latitude = Convert.ToDouble(gc.latitude);
+
+                db.GuideLocations.Add(gl);
+            }
+
+            db.SaveChanges();
+
+            return Ok("OK");
         }
 
         // POST: api/Guides/<id>/location/<location>
@@ -299,7 +450,6 @@ namespace Touri_Server.Controllers
 
             db.GuideLocations.Add(gl);
  
-
             db.SaveChanges();
 
             return Ok("Location added");

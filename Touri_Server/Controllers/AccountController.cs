@@ -335,6 +335,7 @@ namespace Touri_Server.Controllers
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+               // return BadRequest();
             }
 
             return Ok();
