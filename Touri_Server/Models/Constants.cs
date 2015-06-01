@@ -152,24 +152,32 @@ namespace Touri_Server.Models
             }
             var requestUri = string.Format(Constants.GEOCODE_API_BASE, Uri.EscapeDataString(address));
 
-            var request = WebRequest.Create(requestUri);
-            var response = request.GetResponse();
-            var xdoc = XDocument.Load(response.GetResponseStream());
+            try
+            {
+                var request = WebRequest.Create(requestUri);
+                var response = request.GetResponse();
+                var xdoc = XDocument.Load(response.GetResponseStream());
 
-            var result = xdoc.Element("GeocodeResponse").Element("result");
-            if (result == null)
+                var result = xdoc.Element("GeocodeResponse").Element("result");
+                if (result == null)
+                {
+                    return null;
+                }
+                var locationElement = result.Element("geometry").Element("location");
+                var lat = locationElement.Element("lat").Value;
+                var lng = locationElement.Element("lng").Value;
+
+                Geocode gc = new Geocode();
+                gc.latitude = lat.ToString();
+                gc.longitude = lng.ToString();
+                gc.address = address;
+                return gc;
+            }
+            catch (Exception e)
             {
                 return null;
             }
-            var locationElement = result.Element("geometry").Element("location");
-            var lat = locationElement.Element("lat").Value;
-            var lng = locationElement.Element("lng").Value;
 
-            Geocode gc = new Geocode();
-            gc.latitude = lat.ToString();
-            gc.longitude = lng.ToString();
-            gc.address = address;
-            return gc;
         }
     }
 }
