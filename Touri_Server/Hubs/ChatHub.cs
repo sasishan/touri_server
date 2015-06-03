@@ -73,35 +73,39 @@ namespace Touri_Server.Hubs
             {
                 //do nothing
             }
-
-
          
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            var username = Context.QueryString["username"];
-            Connection c = db.Connections.Find(username);
-
-            if (c!=null)
+            //if the stop was intentional then we will show offline
+            //otherwise, we have to assume the service will restart the connection
+            if (stopCalled==true)
             {
-                db.Connections.Remove(c);
-                try
+                var username = Context.QueryString["username"];
+                Connection c = db.Connections.Find(username);
+
+                if (c != null)
                 {
-                    db.SaveChanges();
+                    db.Connections.Remove(c);
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException E)
+                    {
+                        //Safely ignore this exception
+                    }
+                    catch (Exception e)
+                    {
+                        //Something else has occurred
+                        throw;
+                    }
+
                 }
-                catch (DbUpdateConcurrencyException E)
-                {
-                    //Safely ignore this exception
-                }
-                catch (Exception e)
-                {
-                    //Something else has occurred
-                    throw;
-                }
-                
             }
+
 
             return base.OnDisconnected(stopCalled);
         }
