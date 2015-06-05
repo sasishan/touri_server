@@ -14,43 +14,16 @@ namespace Touri_Server.Hubs
     {
         private NativusDBEntities db = new NativusDBEntities();
 
-
         public override Task OnConnected()
         {
             var username = Context.QueryString["username"];
             var targetUsername = Context.QueryString["targetUserName"];
-            Random r = new Random();
 
             //add the user to the connected DB
             Connection c = new Connection();
 
-            //If the user is not logged in, then create a traveller id for them
-            if (username.Equals(""))
-            {                
-                username = "Traveller_" + r.Next();
-                int count = (from connects in db.Connections
-                            where (connects.username == username)
-                            select connects).Count();
-
-                //find a username that does not exist in the Connection table
-                int tries = 0;
-                while (count!=0 && tries<5)
-                {
-                    username = "Traveller_" + r.Next();
-
-                    count = (from connects in db.Connections
-                                 where (connects.username == username)
-                                 select connects).Count();
-                    tries++;
-                }
-            }
             //create a group chat using their username
             Groups.Add(Context.ConnectionId, username);
-
-         //   c.username = username;
-          //  c.connectionId = Context.ConnectionId;
-          //  c.lastConnected = DateTime.Now;
-           // db.Connections.Add(c);
 
             try
             {
@@ -102,10 +75,8 @@ namespace Touri_Server.Hubs
                         //Something else has occurred
                         throw;
                     }
-
                 }
             }
-
 
             return base.OnDisconnected(stopCalled);
         }
@@ -152,30 +123,69 @@ namespace Touri_Server.Hubs
             }
         }
 
+        //Log the message into the database and set it NOT downloaded
+        private int LogNewMessage(string message, string from, string to)
+        {
+            Message m = new Message();
+            m.toUser = to;
+            m.fromUser = from;
+            m.message1 = message;
+            m.Timestamp = DateTime.Now;
+            m.Downloaded = Constants.MessageNotDownloaded;
+            db.Messages.Add(m);
+
+            try
+            {
+                db.SaveChanges();
+                return m.id;
+            }
+            catch (Exception e)
+            {
+                return Constants.Uninitialized;
+            }
+        }
+
         public void SendPrivateMessage(string message, string fromUsername, string targetUsername)
         {
-           // int tgtId = Convert.ToInt32(targetId);
-         //   GuideProfile gp = db.GuideProfiles.Find(tgtId);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername);
 
-            Connection conn = db.Connections.Find(targetUsername);
-
-            if (conn==null)
+            //if we can't log the message return an error
+            if (messageId == Constants.Uninitialized)
             {
-                Message m = new Message();
-                m.toUser = targetUsername;
-                m.fromUser = fromUsername;
-                m.message1 = message;
-                m.Timestamp = DateTime.Today;
-                m.Downloaded = "N";
-                db.Messages.Add(m);
-                db.SaveChanges();
-              //  Clients.Group(fromUsername).messageReceived("Touri", "Message not delivered. This user is not online");
+                Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1");
                 return;
             }
-            else
+
+            //send the message - if the user is not online, no harm done as they will download it when connected
+            Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString());
+        }
+
+        //receive the ack from the client
+        public void AcknowledgeMessage(int messageId)
+        {
+            int result = UpdateMessageAsSeen(messageId);
+        }
+
+        //when an ack is received for the message, update our database so we don't download it later
+        private int UpdateMessageAsSeen(int messageId)
+        {
+            int result = Constants.FAIL;
+            try
             {
-                Clients.Group(targetUsername).messageReceived(fromUsername, message);
+                Message m = db.Messages.Find(messageId);
+                if (m != null)
+                {
+                    m.Downloaded = Constants.MessageDownloaded;
+                    //m.LastDownloaded = DateTime.Now;
+                    db.SaveChangesAsync();
+                    result = Constants.SUCCESS;
+                }
             }
+            catch (Exception e)
+            {
+                //do nothing
+            }
+            return result;
         }
 
         public void Send(string platform, string message)

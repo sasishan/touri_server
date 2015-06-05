@@ -35,11 +35,12 @@ namespace Touri_Server.Controllers
         {
             var identity = User.Identity;
             string username = identity.Name;
+
             List<ChatMessage> cMessages = new List<ChatMessage>();
 
             var messages = (from msgs in db.Messages
                             where (msgs.toUser == username && !msgs.Downloaded.Equals("Y"))
-                            select msgs);
+                            select msgs).OrderBy(m => m.Timestamp);
 
             foreach (Message m in messages)
             {
@@ -47,11 +48,15 @@ namespace Touri_Server.Controllers
 
                 //assume everything goes well and the message is sent down
                 //we are using an optimistic algorithm that all messages once requested will be downloaded properly
-                m.Downloaded = "Y";
+                m.Downloaded = Constants.MessageDownloaded;
                 m.LastDownloaded = DateTime.Now;
                 cMessages.Add(cm);
             }
-            db.SaveChanges();
+
+            if (messages.Count() > 0)
+            {
+                db.SaveChanges();
+            }
 
             return cMessages;
         }

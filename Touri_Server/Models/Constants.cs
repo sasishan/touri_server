@@ -12,7 +12,6 @@ namespace Touri_Server.Models
 {
     static class Constants
     {
-        public static string LOG_TAG = "ExampleApp";
         public static string PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
         public static string GEOCODE_API_BASE = "http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false";
         public static string TYPE_AUTOCOMPLETE = "/autocomplete";
@@ -27,6 +26,14 @@ namespace Touri_Server.Models
         public static string IMAGE_PATH = "images";
         public static string IMAGE_APPLICATION_DEFAULT_PATH = "images\application";
 
+        public static string MessageDownloaded = "Y";
+        public static string MessageNotDownloaded = "N";
+
+        public static string MessageNotDelivered = "Unable to deliver message.";
+
+        public static int Uninitialized = -1;
+        public static int SUCCESS= 1;
+        public static int FAIL = -1;
     }
 
     public class TouriPaths
