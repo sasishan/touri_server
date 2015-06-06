@@ -160,6 +160,11 @@ namespace Touri_Server.Hubs
             Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString());
         }
 
+        public void PingClient(string fromUsername)
+        {
+            Clients.Group(fromUsername).PingClient(DateTime.Now.ToString());
+        }
+
         //receive the ack from the client
         public void AcknowledgeMessage(int messageId)
         {
@@ -188,10 +193,21 @@ namespace Touri_Server.Hubs
             return result;
         }
 
-        public void Send(string platform, string message)
+        public void Send(string fromUsername, string targetUsername, string message)
         {
             
-            Clients.All.messageReceived(platform, message);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername);
+
+            //if we can't log the message return an error
+            if (targetUsername.Equals("All"))
+            {
+                Clients.All.messageReceived(targetUsername, message, messageId);
+            }
+            else if (messageId != Constants.Uninitialized)
+            {
+                Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString());
+            }
+
             //Clients.All.addNewMessageToPage(platform, message);
         }
     }
