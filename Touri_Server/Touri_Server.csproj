@@ -332,6 +332,9 @@
       <DependentUpon>TouriModel.edmx</DependentUpon>
       <LastGenOutput>TouriModel.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Touri.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

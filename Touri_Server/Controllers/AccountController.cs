@@ -325,6 +325,7 @@ namespace Touri_Server.Controllers
         {
             if (!ModelState.IsValid)
             {
+               // return Ok(ModelState.Keys.);
                 return BadRequest(ModelState);
             }
 
@@ -334,11 +335,12 @@ namespace Touri_Server.Controllers
 
             if (!result.Succeeded)
             {
+                //return Ok(result.Errors);
                 return GetErrorResult(result);
                // return BadRequest();
             }
 
-            return Ok();
+            return Ok("OK");
         }
 
         // POST api/Account/RegisterExternal
