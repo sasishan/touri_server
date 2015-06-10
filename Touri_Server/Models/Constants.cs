@@ -19,14 +19,14 @@ namespace Touri_Server.Models
         public static string API_KEY = "AIzaSyDPRsZJ3iQcO8PdUU1yCjFAKA7etzg7PPM";
         public static int WithinDistanceDefaultInKM = 50;
         public static int DefaultImageId = 1;
-        public static string THUMBNAIL_PATH = "thumbnail\\";
-
 
         public static string IMAGE_CATEGORY_GUIDE_PROFILE = "guide";
         public static string IMAGE_CATEGORY_APPLICATION_EXPERTISE = "expertise";
-        public static string APPLICATION_USER= "default";
+        public static string APPLICATION_USER = "default";
         public static string IMAGE_PATH = "images";
         public static string IMAGE_APPLICATION_DEFAULT_PATH = "images\application";
+
+        public static string THUMBNAIL_PATH = "thumbnail\\";
 
         public static string MessageDownloaded = "Y";
         public static string MessageNotDownloaded = "N";
@@ -34,7 +34,7 @@ namespace Touri_Server.Models
         public static string MessageNotDelivered = "Unable to deliver message.";
 
         public static int Uninitialized = -1;
-        public static int SUCCESS= 1;
+        public static int SUCCESS = 1;
         public static int FAIL = -1;
     }
 
@@ -50,11 +50,24 @@ namespace Touri_Server.Models
             return fullPath;
         }
 
+        public string GetNewImageDirThumbnailPath(String category, string username, string fileNameWithExtension)
+        {
+            string fullPath = GetNewImageDirPath(category, username, fileNameWithExtension);
+            fullPath += Constants.THUMBNAIL_PATH;
+            return fullPath;
+        }
+
         public string GetBaseImagePath(String category)
         {
             return Constants.IMAGE_PATH;
         }
 
+
+        public string GetImageThumbnailPathFromImageRecord(TouriImage img)
+        {
+            string fullPath = GetImagePathFromImageRecord(img);
+            return (fullPath += Constants.THUMBNAIL_PATH);
+        }
 
         public string GetImagePathFromImageRecord(TouriImage img)
         {
@@ -85,7 +98,7 @@ namespace Touri_Server.Models
             cm.fromUser = msg.fromUser;
             cm.toUser = msg.toUser;
             cm.timeStamp = msg.Timestamp.ToString();
-            
+
             return cm;
         }
 
@@ -102,16 +115,16 @@ namespace Touri_Server.Models
             g.description = guideProfile.description;
             g.summary = guideProfile.summary;
 
-            int countCons = (int) (from cons in db.Connections
-                             where (cons.username == g.username)
-                             select cons).Count();
-            
+            int countCons = (int)(from cons in db.Connections
+                                  where (cons.username == g.username)
+                                  select cons).Count();
+
             g.availability = 0;
-            if (countCons>0)
+            if (countCons > 0)
             {
-                g.availability = 1;                
-            }            
-            
+                g.availability = 1;
+            }
+
             g.profileImage = guideProfile.profileImage;
 
             foreach (GuideLanguage l in guideProfile.GuideLanguages)
@@ -145,7 +158,7 @@ namespace Touri_Server.Models
         }
     }
 
-   
+
     public class Geocoder
     {
         public Geocoder()
