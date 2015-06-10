@@ -19,6 +19,8 @@ namespace Touri_Server.Models
         public static string API_KEY = "AIzaSyDPRsZJ3iQcO8PdUU1yCjFAKA7etzg7PPM";
         public static int WithinDistanceDefaultInKM = 50;
         public static int DefaultImageId = 1;
+        public static string THUMBNAIL_PATH = "thumbnail\\";
+
 
         public static string IMAGE_CATEGORY_GUIDE_PROFILE = "guide";
         public static string IMAGE_CATEGORY_APPLICATION_EXPERTISE = "expertise";

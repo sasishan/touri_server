@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,7 +22,7 @@ namespace Touri_Server.Controllers
         private Converter converter = new Converter();
 
         private string getGuideUsername(int guideId)
-        {            
+        {
             var guide = (from guides in db.GuideProfiles
                          where guides.guideId == guideId
                          select guides);
@@ -32,7 +33,7 @@ namespace Touri_Server.Controllers
             return null;
         }
 
-        private bool validRequestor (string requestor)
+        private bool validRequestor(string requestor)
         {
             var identity = User.Identity;
             if (requestor.Equals(identity.Name))
@@ -100,18 +101,50 @@ namespace Touri_Server.Controllers
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
-                    if (!Path.GetExtension(postedFile.FileName).Equals(".jpg"))
+                    string extension = Path.GetExtension(postedFile.FileName);
+                    if (!Path.GetExtension(postedFile.FileName).ToLower().Equals(".jpg") && !Path.GetExtension(postedFile.FileName).ToLower().Equals(".png"))
                     {
                         return Request.CreateResponse(HttpStatusCode.BadRequest);
-                    }           
+                    }
+
                     var dirPath = tp.GetNewImageDirPath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE, requestor, postedFile.FileName);
+                    var dirPathThumbnail = tp.GetNewImageDirThumbnailPath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE, requestor, postedFile.FileName);
 
                     if (!Directory.Exists(dirPath))
                     {
                         Directory.CreateDirectory(dirPath);
                     }
-                    
-                    postedFile.SaveAs(dirPath+"\\"+ postedFile.FileName);
+
+                    if (!Directory.Exists(dirPathThumbnail))
+                    {
+                        Directory.CreateDirectory(dirPathThumbnail);
+                    }
+
+                    string fileNameAndPath = dirPath + "\\" + postedFile.FileName;
+                    string thumbnailAndPath = dirPathThumbnail + "\\" + postedFile.FileName;
+
+                    try
+                    {
+                        postedFile.SaveAs(fileNameAndPath);
+                    }
+                    catch (Exception e)
+                    {
+                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                        return result;
+                    }
+
+                    Image image = Image.FromFile(fileNameAndPath);
+
+                    try
+                    {
+                        Image thumb = image.GetThumbnailImage(200, 200, () => false, IntPtr.Zero);
+                        thumb.Save(thumbnailAndPath);
+                    }
+                    catch (Exception e)
+                    {
+                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                        return result;
+                    }
 
                     TouriImage ti = new TouriImage();
                     ti.filename = Path.GetFileNameWithoutExtension(postedFile.FileName);
@@ -246,7 +279,7 @@ namespace Touri_Server.Controllers
             }
 
             GuideProfile gp = db.GuideProfiles.Find(guideId);
-            if (gp==null)
+            if (gp == null)
             {
                 return BadRequest("Could not fine guide");
             }
@@ -264,7 +297,7 @@ namespace Touri_Server.Controllers
         [HttpPost]
         public IHttpActionResult PostGuideLanguages(int guideId, ListLocsLangs data)
         {
-            if (!ModelState.IsValid || data==null)
+            if (!ModelState.IsValid || data == null)
             {
                 return BadRequest(ModelState);
             }
@@ -477,7 +510,7 @@ namespace Touri_Server.Controllers
             gl.latitude = Convert.ToDouble(gc.latitude);
 
             db.GuideLocations.Add(gl);
- 
+
             db.SaveChanges();
 
             return Ok("Location added");
@@ -505,7 +538,7 @@ namespace Touri_Server.Controllers
             GuideProfile guideProfile = new GuideProfile();
             guideProfile.username = ((guide.username == null) ? "" : guide.username);
             //guideProfile.username = guide.username;
-            guideProfile.firstName = (( guide.fName == null) ? "" : guide.fName);
+            guideProfile.firstName = ((guide.fName == null) ? "" : guide.fName);
             guideProfile.lastName = ((guide.lName == null) ? "" : guide.lName);
             guideProfile.guideId = 0;
             guideProfile.address1 = ((guide.address1 == null) ? "" : guide.address1);
