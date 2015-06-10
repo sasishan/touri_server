@@ -26,8 +26,6 @@ namespace Touri_Server.Models
         public static string IMAGE_PATH = "images";
         public static string IMAGE_APPLICATION_DEFAULT_PATH = "images\application";
 
-        public static string THUMBNAIL_PATH = "thumbnail\\";
-
         public static string MessageDownloaded = "Y";
         public static string MessageNotDownloaded = "N";
 
@@ -50,24 +48,11 @@ namespace Touri_Server.Models
             return fullPath;
         }
 
-        public string GetNewImageDirThumbnailPath(String category, string username, string fileNameWithExtension)
-        {
-            string fullPath = GetNewImageDirPath(category, username, fileNameWithExtension);
-            fullPath +=Constants.THUMBNAIL_PATH;
-            return fullPath;
-        }
-
         public string GetBaseImagePath(String category)
         {
             return Constants.IMAGE_PATH;
         }
 
-
-        public string GetImageThumbnailPathFromImageRecord(TouriImage img)
-        {
-            string fullPath = GetImagePathFromImageRecord(img);
-            return (fullPath+=Constants.THUMBNAIL_PATH);
-        }
 
         public string GetImagePathFromImageRecord(TouriImage img)
         {

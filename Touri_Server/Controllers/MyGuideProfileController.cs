@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -101,50 +100,18 @@ namespace Touri_Server.Controllers
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
-                    string extension = Path.GetExtension(postedFile.FileName);
-                    if (!Path.GetExtension(postedFile.FileName).ToLower().Equals(".jpg") && !Path.GetExtension(postedFile.FileName).ToLower().Equals(".png"))
+                    if (!Path.GetExtension(postedFile.FileName).Equals(".jpg"))
                     {
                         return Request.CreateResponse(HttpStatusCode.BadRequest);
                     }           
-
                     var dirPath = tp.GetNewImageDirPath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE, requestor, postedFile.FileName);
-                    var dirPathThumbnail = tp.GetNewImageDirThumbnailPath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE, requestor, postedFile.FileName);
 
                     if (!Directory.Exists(dirPath))
                     {
                         Directory.CreateDirectory(dirPath);
                     }
-
-                    if (!Directory.Exists(dirPathThumbnail))
-                    {
-                        Directory.CreateDirectory(dirPathThumbnail);
-                    }
-
-                    string fileNameAndPath = dirPath + "\\" + postedFile.FileName;
-                    string thumbnailAndPath = dirPathThumbnail + "\\" + postedFile.FileName;
-
-                    try
-                    {
-                        postedFile.SaveAs(fileNameAndPath);
-                    }
-                    catch (Exception e)
-                    {
-                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
-                        return result;
-                    }
-
-                    Image image = Image.FromFile(fileNameAndPath);
-
-                    try
-                    {
-                        Image thumb = image.GetThumbnailImage(200, 200, () => false, IntPtr.Zero);
-                        thumb.Save(thumbnailAndPath);
-                    }
-                    catch (Exception e)
-                    {
-                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
-                        return result;
-                    }
+                    
+                    postedFile.SaveAs(dirPath+"\\"+ postedFile.FileName);
 
                     TouriImage ti = new TouriImage();
                     ti.filename = Path.GetFileNameWithoutExtension(postedFile.FileName);
