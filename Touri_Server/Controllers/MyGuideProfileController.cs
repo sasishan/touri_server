@@ -82,14 +82,14 @@ namespace Touri_Server.Controllers
             string requestor = getGuideUsername(guideId);
             if (!validRequestor(requestor))
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad guide id");
             }
 
             GuideProfile guideProfile = db.GuideProfiles.Find(guideId);
             if (guideProfile == null)
             {
                 //error should not happen!
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad guide id");
             }
 
             HttpResponseMessage result = null;
@@ -104,7 +104,7 @@ namespace Touri_Server.Controllers
                     string extension = Path.GetExtension(postedFile.FileName);
                     if (!Path.GetExtension(postedFile.FileName).ToLower().Equals(".jpg") && !Path.GetExtension(postedFile.FileName).ToLower().Equals(".png"))
                     {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad extension: " + Path.GetExtension(postedFile.FileName));
                     }
 
                     var dirPath = tp.GetNewImageDirPath(Constants.IMAGE_CATEGORY_GUIDE_PROFILE, requestor, postedFile.FileName);
@@ -170,13 +170,13 @@ namespace Touri_Server.Controllers
                         }
                         catch (Exception e)
                         {
-                            result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                            result = Request.CreateResponse(HttpStatusCode.BadRequest, "Could not scale image succesfully with errors: " + e.Message);
                         }
 
                     }
                     catch (Exception e)
                     {
-                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                        result = Request.CreateResponse(HttpStatusCode.BadRequest, "Could not save image succesfully with errors: " + e.Message);
                         return result;
                     }
 
@@ -197,7 +197,7 @@ namespace Touri_Server.Controllers
                     }
                     catch (Exception e)
                     {
-                        result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                        result = Request.CreateResponse(HttpStatusCode.BadRequest, "Could not save thumbnail succesfully with errors: " + e.Message);
                         return result;
                     }
 
@@ -215,11 +215,11 @@ namespace Touri_Server.Controllers
                     guideProfile.profileImage = ti.id;
                     db.SaveChanges();
                 }
-                result = Request.CreateResponse(HttpStatusCode.Created);
+                result = Request.CreateResponse(HttpStatusCode.OK, "OK");
             }
             else
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                result = Request.CreateResponse(HttpStatusCode.BadRequest, "Error in http request");
             }
 
             return result;
