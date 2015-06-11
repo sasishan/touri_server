@@ -123,9 +123,56 @@ namespace Touri_Server.Controllers
                     string fileNameAndPath = dirPath + "\\" + postedFile.FileName;
                     string thumbnailAndPath = dirPathThumbnail + "\\" + postedFile.FileName;
 
+                    //resize the image! 
+                    //@todo make more effiicent!
+                    Image image;
+                    double scaleWidth, scaleThumbHeight = 0;
+                    double scaleHeight, scaleThumbWidth=0;
                     try
                     {
+                        if (File.Exists(fileNameAndPath))
+                        {
+                            File.Delete(fileNameAndPath);
+                        }
+
                         postedFile.SaveAs(fileNameAndPath);
+
+                        try
+                        {
+                            image = Image.FromFile(fileNameAndPath);
+                            double height = image.Height;
+                            double width = image.Width;
+
+
+                            if (width>height)
+                            {
+                                scaleHeight = (height / width) * Constants.FULL_SIZE;
+                                scaleWidth = Constants.FULL_SIZE;
+
+                                scaleThumbHeight = (height / width) * Constants.THUMBNAIL_SIZE;
+                                scaleThumbWidth = Constants.THUMBNAIL_SIZE;
+                            }
+                            else
+                            {
+                                scaleWidth = (width / height) * Constants.FULL_SIZE;
+                                scaleHeight = Constants.FULL_SIZE;
+
+                                scaleThumbWidth = (width / height) * Constants.THUMBNAIL_SIZE;
+                                scaleThumbHeight = Constants.THUMBNAIL_SIZE;
+                            }
+
+
+                            Image scaled = image.GetThumbnailImage((int)scaleWidth, (int)scaleHeight, () => false, IntPtr.Zero);
+                            image.Dispose();
+                            File.Delete(fileNameAndPath);
+                            scaled.Save(fileNameAndPath);
+                            scaled.Dispose();
+                        }
+                        catch (Exception e)
+                        {
+                            result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                        }
+
                     }
                     catch (Exception e)
                     {
@@ -133,12 +180,20 @@ namespace Touri_Server.Controllers
                         return result;
                     }
 
-                    Image image = Image.FromFile(fileNameAndPath);
-
+                    //create a thumbnail
                     try
                     {
-                        Image thumb = image.GetThumbnailImage(200, 200, () => false, IntPtr.Zero);
+                        image = Image.FromFile(fileNameAndPath);
+
+                        Image thumb = image.GetThumbnailImage((int) scaleThumbWidth, (int)scaleThumbHeight, () => false, IntPtr.Zero);
+                        image.Dispose();
+
+                        if (File.Exists(thumbnailAndPath))
+                        {
+                            File.Delete(thumbnailAndPath);
+                        }
                         thumb.Save(thumbnailAndPath);
+                        thumb.Dispose();
                     }
                     catch (Exception e)
                     {

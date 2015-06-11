@@ -31,8 +31,16 @@ namespace WebApplicationMVC5.Controllers
             fullPath = tp.GetImagePathFromImageRecord(img);
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StreamContent(new FileStream(fullPath, FileMode.Open, FileAccess.Read));
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+            try
+            {
+                response.Content = new StreamContent(new FileStream(fullPath, FileMode.Open, FileAccess.Read));
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+            }
+            catch (Exception e)
+            {
+                //do nothing
+            }
+            
 
             return response;
         }
