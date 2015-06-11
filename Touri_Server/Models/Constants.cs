@@ -20,6 +20,9 @@ namespace Touri_Server.Models
         public static int WithinDistanceDefaultInKM = 50;
         public static int DefaultImageId = 1;
         public static string THUMBNAIL_PATH = "thumbnail\\";
+        public static int THUMBNAIL_SIZE = 200;
+        public static int FULL_SIZE = 800;
+
 
 
         public static string IMAGE_CATEGORY_GUIDE_PROFILE = "guide";
@@ -54,6 +57,20 @@ namespace Touri_Server.Models
         {
             return Constants.IMAGE_PATH;
         }
+
+        public string GetImageThumbnailPathFromImageRecord(TouriImage img)
+        {
+            string fullPath = GetImagePathFromImageRecord(img);
+            return (fullPath += Constants.THUMBNAIL_PATH);
+        }
+
+        public string GetNewImageDirThumbnailPath(String category, string username, string fileNameWithExtension)
+        {
+            string fullPath = GetNewImageDirPath(category, username, fileNameWithExtension);
+            fullPath += Constants.THUMBNAIL_PATH;
+            return fullPath;
+        }
+
 
 
         public string GetImagePathFromImageRecord(TouriImage img)
