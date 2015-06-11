@@ -21,7 +21,7 @@ namespace Touri_Server.Models
         public static int DefaultImageId = 1;
         public static string THUMBNAIL_PATH = "thumbnail\\";
         public static int THUMBNAIL_SIZE = 200;
-        public static int FULL_SIZE = 800;
+        public static int FULL_SIZE = 600;
 
 
 

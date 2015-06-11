@@ -126,6 +126,8 @@ namespace Touri_Server.Controllers
                     //resize the image! 
                     //@todo make more effiicent!
                     Image image;
+                    double scaleWidth, scaleThumbHeight = 0;
+                    double scaleHeight, scaleThumbWidth=0;
                     try
                     {
                         if (File.Exists(fileNameAndPath))
@@ -138,8 +140,29 @@ namespace Touri_Server.Controllers
                         try
                         {
                             image = Image.FromFile(fileNameAndPath);
-                            
-                            Image scaled = image.GetThumbnailImage(Constants.FULL_SIZE, Constants.FULL_SIZE, () => false, IntPtr.Zero);
+                            double height = image.Height;
+                            double width = image.Width;
+
+
+                            if (width>height)
+                            {
+                                scaleHeight = (height / width) * Constants.FULL_SIZE;
+                                scaleWidth = Constants.FULL_SIZE;
+
+                                scaleThumbHeight = (height / width) * Constants.THUMBNAIL_SIZE;
+                                scaleThumbWidth = Constants.THUMBNAIL_SIZE;
+                            }
+                            else
+                            {
+                                scaleWidth = (width / height) * Constants.FULL_SIZE;
+                                scaleHeight = Constants.FULL_SIZE;
+
+                                scaleThumbWidth = (width / height) * Constants.THUMBNAIL_SIZE;
+                                scaleThumbHeight = Constants.THUMBNAIL_SIZE;
+                            }
+
+
+                            Image scaled = image.GetThumbnailImage((int)scaleWidth, (int)scaleHeight, () => false, IntPtr.Zero);
                             image.Dispose();
                             File.Delete(fileNameAndPath);
                             scaled.Save(fileNameAndPath);
@@ -161,7 +184,8 @@ namespace Touri_Server.Controllers
                     try
                     {
                         image = Image.FromFile(fileNameAndPath);
-                        Image thumb = image.GetThumbnailImage(200, 200, () => false, IntPtr.Zero);
+
+                        Image thumb = image.GetThumbnailImage((int) scaleThumbWidth, (int)scaleThumbHeight, () => false, IntPtr.Zero);
                         image.Dispose();
 
                         if (File.Exists(thumbnailAndPath))
