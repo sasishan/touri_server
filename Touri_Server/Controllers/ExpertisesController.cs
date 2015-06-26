@@ -78,18 +78,32 @@ namespace Touri_Server.Controllers
 
                     foreach (GuideProfile g in guideProfilesLocs)
                     {
-                      //  foreach (GuideProfile qg in queryProfiles)
-                        //{
-                            //if (qg.guideId!=g.guideId)
-                            //{
-                              //  profileCount++;
-                            //}
-                            
-//                        }
                         if (!queryProfiles.Contains(g))
                         {
-                            queryProfiles.Add(g);
-                            profileCount++;
+                            bool breakout = false;
+                            
+                            foreach (string qlang in query.langs)
+                            {
+                                foreach (GuideLanguage l in g.GuideLanguages)
+                                {
+                                    if (l.Language.Language1.ToLower().Equals(qlang.ToLower()))
+                                    {
+                                        breakout = true;
+                                        break;
+                                    }
+                                }
+                                if (breakout)
+                                {
+                                    break;
+                                }
+                            }
+
+                            if (breakout || query.langs.Count==0)
+                            {
+                                queryProfiles.Add(g);
+                                profileCount++;
+
+                            }
                         }
                     }
                 }
