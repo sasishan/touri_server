@@ -148,7 +148,6 @@ namespace Touri_Server.Controllers
         [ResponseType(typeof(GuideProfile))]
         public Guide GetGuideProfile(int id)
         {
-
             GuideProfile guideProfile = db.GuideProfiles.Find(id);
             if (guideProfile == null)
             {

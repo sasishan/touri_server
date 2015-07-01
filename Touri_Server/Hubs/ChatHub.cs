@@ -130,8 +130,22 @@ namespace Touri_Server.Hubs
             m.toUser = to;
             m.fromUser = from;
             m.message1 = message;
-            m.Timestamp = DateTime.Now;
+            DateTime now = DateTime.Now;
+            m.Timestamp = now;
             m.Downloaded = Constants.MessageNotDownloaded;
+            
+            UserLastMessage lm = db.UserLastMessages.Find(from);
+            if (lm != null)
+            {
+                lm.LastDateTime = now;
+            }
+            else
+            {
+                lm = new UserLastMessage();
+                lm.Username = from;
+                lm.LastDateTime = now;
+                db.UserLastMessages.Add(lm);
+            }
             db.Messages.Add(m);
 
             try

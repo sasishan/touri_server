@@ -149,6 +149,14 @@
           <Property Name="lastName" Type="nvarchar" MaxLength="500" />
           <Property Name="phone" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="UserLastMessage">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <Association Name="FK_GuideExpertises_Expertises">
           <End Role="Expertises" Type="Self.Expertises" Multiplicity="1" />
           <End Role="GuideExpertises" Type="Self.GuideExpertises" Multiplicity="*" />
@@ -285,6 +293,7 @@
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TouriImages" EntityType="Self.TouriImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TravellerProfile" EntityType="Self.TravellerProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLastMessage" EntityType="Self.UserLastMessage" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_GuideExpertises_Expertises" Association="Self.FK_GuideExpertises_Expertises">
             <End Role="Expertises" EntitySet="Expertises" />
             <End Role="GuideExpertises" EntitySet="GuideExpertises" />
@@ -386,6 +395,7 @@
             <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
           </AssociationSet>
           <EntitySet Name="Messages" EntityType="NativusDBModel.Message" />
+          <EntitySet Name="UserLastMessages" EntityType="NativusDBModel.UserLastMessage" />
         </EntityContainer>
         <EntityType Name="Attribute">
           <Key>
@@ -671,6 +681,14 @@
           <Property Name="Downloaded" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="LastDownloaded" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="UserLastMessage">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -833,6 +851,15 @@
                 <ScalarProperty Name="fromUser" ColumnName="fromUser" />
                 <ScalarProperty Name="toUser" ColumnName="toUser" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLastMessages">
+            <EntityTypeMapping TypeName="NativusDBModel.UserLastMessage">
+              <MappingFragment StoreEntitySet="UserLastMessage">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LastDateTime" ColumnName="LastDateTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

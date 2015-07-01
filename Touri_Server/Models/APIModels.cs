@@ -80,6 +80,7 @@ namespace Touri_Server.Models
         public string summary { get; set; }
         public int availability { get; set; }
         public int profileImage { get; set; }
+        public string lastMessageSent { get; set; }
         public List<LanguageWrapper> languages { get; set; }
         public List<LocationWrapper> locationsServed { get; set; }
         public List<ExpertiseWrapper> expertises { get; set; }

@@ -160,5 +160,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UserLastMessages">
+      <EntityTypeMapping TypeName="NativusDBModel.UserLastMessage">
+        <MappingFragment StoreEntitySet="UserLastMessage">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="LastDateTime" ColumnName="LastDateTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

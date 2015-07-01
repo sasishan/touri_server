@@ -127,7 +127,16 @@ namespace Touri_Server.Models
             if (countCons>0)
             {
                 g.availability = 1;                
-            }            
+            }
+
+            var lastUpdate = (from lastMsg in db.UserLastMessages
+                                   where (lastMsg.Username == g.username)
+                                   select lastMsg);
+            g.lastMessageSent = "N/A";
+            if (lastUpdate.Count<UserLastMessage>()>0)
+            {
+                g.lastMessageSent = lastUpdate.First<UserLastMessage>().LastDateTime.ToShortDateString().ToString();
+            }
             
             g.profileImage = guideProfile.profileImage;
 

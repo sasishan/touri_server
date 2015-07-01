@@ -144,6 +144,14 @@
     <Property Name="lastName" Type="nvarchar" MaxLength="500" />
     <Property Name="phone" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="UserLastMessage">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastDateTime" Type="datetime" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
   <Association Name="FK_GuideExpertises_Expertises">
     <End Role="Expertises" Type="Self.Expertises" Multiplicity="1" />
     <End Role="GuideExpertises" Type="Self.GuideExpertises" Multiplicity="*" />
@@ -280,6 +288,7 @@
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TouriImages" EntityType="Self.TouriImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TravellerProfile" EntityType="Self.TravellerProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLastMessage" EntityType="Self.UserLastMessage" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_GuideExpertises_Expertises" Association="Self.FK_GuideExpertises_Expertises">
       <End Role="Expertises" EntitySet="Expertises" />
       <End Role="GuideExpertises" EntitySet="GuideExpertises" />
