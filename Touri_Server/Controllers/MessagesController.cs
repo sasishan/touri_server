@@ -60,5 +60,39 @@ namespace Touri_Server.Controllers
 
             return cMessages;
         }
+
+        // GET: api/messages/messageId
+        //Return messages for the user requesting with ids greater than the given id
+        [Route("api/messages")]
+        [HttpGet]
+        public IEnumerable<ChatMessage> MyMessagesAfterId(int msgId)
+        {
+            var identity = User.Identity;
+            string username = identity.Name;
+
+            List<ChatMessage> cMessages = new List<ChatMessage>();
+
+            var messages = (from msgs in db.Messages
+                            where (msgs.toUser == username && msgs.id>msgId)
+                            select msgs).OrderBy(m => m.Timestamp);
+
+            foreach (Message m in messages)
+            {
+                ChatMessage cm = converter.convertToChatMessage(m);
+
+                //assume everything goes well and the message is sent down
+                //we are using an optimistic algorithm that all messages once requested will be downloaded properly
+                m.Downloaded = Constants.MessageDownloaded;
+                m.LastDownloaded = DateTime.Now;
+                cMessages.Add(cm);
+            }
+
+            if (messages.Count() > 0)
+            {
+                db.SaveChanges();
+            }
+
+            return cMessages;
+        }
     }
 }
