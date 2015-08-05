@@ -159,7 +159,7 @@ namespace Touri_Server.Hubs
             }
         }
 
-        public void SendPrivateMessage(string message, string fromUsername, string targetUsername)
+        public int SendPrivateMessage(string message, string fromUsername, string targetUsername)
         {
             int messageId = LogNewMessage(message, fromUsername, targetUsername);
 
@@ -167,11 +167,12 @@ namespace Touri_Server.Hubs
             if (messageId == Constants.Uninitialized)
             {
                 Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1");
-                return;
+                return Constants.Uninitialized;
             }
 
             //send the message - if the user is not online, no harm done as they will download it when connected
             Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString());
+            return messageId;
         }
 
         public void PingClient(string fromUsername)

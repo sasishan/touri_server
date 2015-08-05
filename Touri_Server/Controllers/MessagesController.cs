@@ -73,7 +73,7 @@ namespace Touri_Server.Controllers
             List<ChatMessage> cMessages = new List<ChatMessage>();
 
             var messages = (from msgs in db.Messages
-                            where (msgs.toUser == username && msgs.id>msgId)
+                            where ( (msgs.toUser == username || msgs.fromUser == username)  && msgs.id>msgId)
                             select msgs).OrderBy(m => m.Timestamp);
 
             foreach (Message m in messages)
