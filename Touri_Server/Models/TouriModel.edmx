@@ -106,6 +106,7 @@
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="Downloaded" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="LastDownloaded" Type="datetime" />
+          <Property Name="fromUserId" Type="int" />
         </EntityType>
         <EntityType Name="ReviewedAttributes">
           <Key>
@@ -394,8 +395,8 @@
             <End Role="Review" EntitySet="Reviews" />
             <End Role="ReviewedAttribute" EntitySet="ReviewedAttributes" />
           </AssociationSet>
-          <EntitySet Name="Messages" EntityType="NativusDBModel.Message" />
           <EntitySet Name="UserLastMessages" EntityType="NativusDBModel.UserLastMessage" />
+          <EntitySet Name="Messages" EntityType="NativusDBModel.Message" />
         </EntityContainer>
         <EntityType Name="Attribute">
           <Key>
@@ -669,6 +670,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserLastMessage">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Message">
           <Key>
             <PropertyRef Name="id" />
@@ -680,14 +689,7 @@
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Downloaded" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="LastDownloaded" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="UserLastMessage">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LastDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fromUserId" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -841,9 +843,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserLastMessages">
+            <EntityTypeMapping TypeName="NativusDBModel.UserLastMessage">
+              <MappingFragment StoreEntitySet="UserLastMessage">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LastDateTime" ColumnName="LastDateTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="NativusDBModel.Message">
               <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="fromUserId" ColumnName="fromUserId" />
                 <ScalarProperty Name="LastDownloaded" ColumnName="LastDownloaded" />
                 <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
@@ -851,15 +863,6 @@
                 <ScalarProperty Name="fromUser" ColumnName="fromUser" />
                 <ScalarProperty Name="toUser" ColumnName="toUser" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserLastMessages">
-            <EntityTypeMapping TypeName="NativusDBModel.UserLastMessage">
-              <MappingFragment StoreEntitySet="UserLastMessage">
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="LastDateTime" ColumnName="LastDateTime" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

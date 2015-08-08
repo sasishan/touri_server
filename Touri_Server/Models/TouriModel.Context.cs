@@ -39,7 +39,7 @@ namespace Touri_Server.Models
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<TouriImage> TouriImages { get; set; }
         public virtual DbSet<TravellerProfile> TravellerProfiles { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<UserLastMessage> UserLastMessages { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }

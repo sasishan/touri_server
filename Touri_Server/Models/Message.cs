@@ -21,5 +21,6 @@ namespace Touri_Server.Models
         public System.DateTime Timestamp { get; set; }
         public string Downloaded { get; set; }
         public Nullable<System.DateTime> LastDownloaded { get; set; }
+        public Nullable<int> fromUserId { get; set; }
     }
 }

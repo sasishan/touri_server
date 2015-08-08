@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using System.Device;
 using Touri_Server.Models;
 using System.Device.Location;
+using WebApplicationMVC5.Controllers;
 
 namespace Touri_Server.Controllers
 {
@@ -268,5 +269,18 @@ namespace Touri_Server.Controllers
             return db.GuideProfiles.Count(e => e.guideId == id) > 0;
         }
 
+        [Route("api/guides/{id}/thumbnail/")]
+        public HttpResponseMessage GetThumbnailImage(int id)
+        {
+            ImagesController iC = new ImagesController();
+
+            GuideProfile guideProfile = db.GuideProfiles.Find(id);
+            if (guideProfile == null)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+
+            return iC.GetThumbnailImage(guideProfile.profileImage);
+        }
     }
 }

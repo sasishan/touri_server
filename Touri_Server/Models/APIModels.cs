@@ -22,6 +22,7 @@ namespace Touri_Server.Models
         public string timeStamp { get; set; }
         public string downloaded { get; set; }
         public string lastDownloaded { get; set; }
+        public int fromUserId { get; set; }
 
         public void setDownloaded()
         {

@@ -14,9 +14,12 @@ namespace Touri_Server.Hubs
     {
         private NativusDBEntities db = new NativusDBEntities();
 
+        int mUserId = Constants.Uninitialized;
+
         public override Task OnConnected()
         {
             var username = Context.QueryString["username"];
+            mUserId = Convert.ToInt32(Context.QueryString["userid"]);
             var targetUsername = Context.QueryString["targetUserName"];
 
             //add the user to the connected DB
@@ -124,9 +127,10 @@ namespace Touri_Server.Hubs
         }
 
         //Log the message into the database and set it NOT downloaded
-        private int LogNewMessage(string message, string from, string to)
+        private int LogNewMessage(string message, string from, string to, int fromId)
         {
             Message m = new Message();
+            m.fromUserId = fromId;
             m.toUser = to;
             m.fromUser = from;
             m.message1 = message;
@@ -159,9 +163,9 @@ namespace Touri_Server.Hubs
             }
         }
 
-        public int SendPrivateMessage(string message, string fromUsername, string targetUsername)
+        public int SendPrivateMessage(string message, string fromUsername, string targetUsername, int userId)
         {
-            int messageId = LogNewMessage(message, fromUsername, targetUsername);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername, userId);
 
             //if we can't log the message return an error
             if (messageId == Constants.Uninitialized)
@@ -211,7 +215,7 @@ namespace Touri_Server.Hubs
         public void Send(string fromUsername, string targetUsername, string message)
         {
             
-            int messageId = LogNewMessage(message, fromUsername, targetUsername);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername, -1);
 
             //if we can't log the message return an error
             if (targetUsername.Equals("All"))

@@ -102,6 +102,12 @@ namespace Touri_Server.Models
             cm.fromUser = msg.fromUser;
             cm.toUser = msg.toUser;
             cm.timeStamp = msg.Timestamp.ToString();
+            int fromId = -1;
+            if (msg.fromUserId!=null)
+            {
+                fromId = (int) msg.fromUserId;
+            }
+            cm.fromUserId = fromId;
             
             return cm;
         }

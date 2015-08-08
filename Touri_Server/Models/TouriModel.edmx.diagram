@@ -29,8 +29,8 @@
         <AssociationConnector Association="NativusDBModel.FK_GuideId" />
         <AssociationConnector Association="NativusDBModel.FK_GuideProfile_Images" />
         <AssociationConnector Association="NativusDBModel.FK_ReviewedAttributes_Review" />
-        <EntityTypeShape EntityType="NativusDBModel.Message" Width="1.5" PointX="10.375" PointY="3.75" />
         <EntityTypeShape EntityType="NativusDBModel.UserLastMessage" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="NativusDBModel.Message" Width="1.5" PointX="10.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
