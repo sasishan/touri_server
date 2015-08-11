@@ -170,12 +170,12 @@ namespace Touri_Server.Hubs
             //if we can't log the message return an error
             if (messageId == Constants.Uninitialized)
             {
-                Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1");
+                Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1", userId);
                 return Constants.Uninitialized;
             }
 
             //send the message - if the user is not online, no harm done as they will download it when connected
-            Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString());
+            Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString(), userId);
             return messageId;
         }
 
