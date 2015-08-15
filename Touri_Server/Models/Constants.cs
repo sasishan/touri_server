@@ -100,8 +100,10 @@ namespace Touri_Server.Models
             cm.id = msg.id;
             cm.message = msg.message1;
             cm.fromUser = msg.fromUser;
-
+            cm.fromName = msg.FromName;
+            cm.toName = msg.ToName;
             cm.toUser = msg.toUser;
+            
             cm.timeStamp = msg.Timestamp.ToString();
             int fromId = -1;
             if (msg.fromUserId!=null)

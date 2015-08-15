@@ -12,6 +12,14 @@ namespace Touri_Server.Models
         public string address { get; set; }
     }
 
+    public class TouriMessage
+    {
+        public string fromUser { get; set; }
+        public string message { get; set; }
+        public int fromUserId { get; set; }
+        public string fromName { get; set; }
+    }
+
 
     public class ChatMessage
     {
@@ -24,6 +32,8 @@ namespace Touri_Server.Models
         public string lastDownloaded { get; set; }
         public int fromUserId { get; set; }
         public int toUserId { get; set; }
+        public string fromName { get; set; }
+        public string toName { get; set; }
 
         public void setDownloaded()
         {

@@ -127,13 +127,15 @@ namespace Touri_Server.Hubs
         }
 
         //Log the message into the database and set it NOT downloaded
-        private int LogNewMessage(string message, string from, string to, int fromId, int toUserId)
+        private int LogNewMessage(string message, string from, string to, int fromId, int toUserId, string fromName, string toName)
         {
             Message m = new Message();
             m.toUserId = toUserId;
             m.fromUserId = fromId;
             m.toUser = to;
             m.fromUser = from;
+            m.FromName = fromName;
+            m.ToName = toName;
             m.message1 = message;
             DateTime now = DateTime.Now;
             m.Timestamp = now;
@@ -165,19 +167,30 @@ namespace Touri_Server.Hubs
         }
 
         //@todo get the touser id - this is the fromuserid
-        public int SendPrivateMessage(string message, string fromUsername, string targetUsername, int fromUserId, int toUserId)
+        public int SendPrivateMessage(string message, string fromUsername, string targetUsername, int fromUserId, int toUserId, string fromName, string toName)
         {
-            int messageId = LogNewMessage(message, fromUsername, targetUsername, fromUserId, toUserId);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername, fromUserId, toUserId, fromName, toName);
+            TouriMessage newMsg = new TouriMessage();
+
 
             //if we can't log the message return an error
             if (messageId == Constants.Uninitialized)
             {
-                Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1", fromUserId);
+                newMsg.message = Constants.MessageNotDelivered;
+                newMsg.fromUser = "Touri";
+                newMsg.fromName = "Touri";
+                newMsg.fromUserId = -1;
+                Clients.Group(fromUsername).messageReceived("Touri", "-1", newMsg);
                 return Constants.Uninitialized;
             }
 
+            newMsg.fromName = fromName;
+            newMsg.fromUser = fromUsername;
+            newMsg.fromUserId = fromUserId;
+            newMsg.message = message;
+
             //send the message - if the user is not online, no harm done as they will download it when connected
-            Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString(), fromUserId);
+            Clients.Group(targetUsername).messageReceived(fromUsername, messageId.ToString(), newMsg);
             return messageId;
         }
 
@@ -218,7 +231,7 @@ namespace Touri_Server.Hubs
         public void Send(string fromUsername, string targetUsername, string message)
         {
             
-            int messageId = LogNewMessage(message, fromUsername, targetUsername, -1, -1);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername, -1, -1, "None", "None");
 
             //if we can't log the message return an error
             if (targetUsername.Equals("All"))
