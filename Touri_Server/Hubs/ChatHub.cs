@@ -127,9 +127,10 @@ namespace Touri_Server.Hubs
         }
 
         //Log the message into the database and set it NOT downloaded
-        private int LogNewMessage(string message, string from, string to, int fromId)
+        private int LogNewMessage(string message, string from, string to, int fromId, int toUserId)
         {
             Message m = new Message();
+            m.toUserId = toUserId;
             m.fromUserId = fromId;
             m.toUser = to;
             m.fromUser = from;
@@ -163,19 +164,20 @@ namespace Touri_Server.Hubs
             }
         }
 
-        public int SendPrivateMessage(string message, string fromUsername, string targetUsername, int userId)
+        //@todo get the touser id - this is the fromuserid
+        public int SendPrivateMessage(string message, string fromUsername, string targetUsername, int fromUserId, int toUserId)
         {
-            int messageId = LogNewMessage(message, fromUsername, targetUsername, userId);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername, fromUserId, toUserId);
 
             //if we can't log the message return an error
             if (messageId == Constants.Uninitialized)
             {
-                Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1", userId);
+                Clients.Group(fromUsername).messageReceived("Touri", Constants.MessageNotDelivered, "-1", fromUserId);
                 return Constants.Uninitialized;
             }
 
             //send the message - if the user is not online, no harm done as they will download it when connected
-            Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString(), userId);
+            Clients.Group(targetUsername).messageReceived(fromUsername, message, messageId.ToString(), fromUserId);
             return messageId;
         }
 
@@ -212,10 +214,11 @@ namespace Touri_Server.Hubs
             return result;
         }
 
+        //not used function
         public void Send(string fromUsername, string targetUsername, string message)
         {
             
-            int messageId = LogNewMessage(message, fromUsername, targetUsername, -1);
+            int messageId = LogNewMessage(message, fromUsername, targetUsername, -1, -1);
 
             //if we can't log the message return an error
             if (targetUsername.Equals("All"))

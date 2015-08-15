@@ -23,6 +23,7 @@ namespace Touri_Server.Models
         public string downloaded { get; set; }
         public string lastDownloaded { get; set; }
         public int fromUserId { get; set; }
+        public int toUserId { get; set; }
 
         public void setDownloaded()
         {

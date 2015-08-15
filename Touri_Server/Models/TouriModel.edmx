@@ -107,6 +107,7 @@
           <Property Name="Downloaded" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="LastDownloaded" Type="datetime" />
           <Property Name="fromUserId" Type="int" />
+          <Property Name="toUserId" Type="int" />
         </EntityType>
         <EntityType Name="ReviewedAttributes">
           <Key>
@@ -690,6 +691,7 @@
           <Property Name="Downloaded" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="LastDownloaded" Type="DateTime" Precision="3" />
           <Property Name="fromUserId" Type="Int32" />
+          <Property Name="toUserId" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -855,6 +857,7 @@
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="NativusDBModel.Message">
               <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="toUserId" ColumnName="toUserId" />
                 <ScalarProperty Name="fromUserId" ColumnName="fromUserId" />
                 <ScalarProperty Name="LastDownloaded" ColumnName="LastDownloaded" />
                 <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />
