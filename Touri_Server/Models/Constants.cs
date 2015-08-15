@@ -27,7 +27,7 @@ namespace Touri_Server.Models
 
         public static string IMAGE_CATEGORY_GUIDE_PROFILE = "guide";
         public static string IMAGE_CATEGORY_APPLICATION_EXPERTISE = "expertise";
-        public static string APPLICATION_USER= "default";
+        public static string APPLICATION_USER = "default";
         public static string IMAGE_PATH = "images";
         public static string IMAGE_APPLICATION_DEFAULT_PATH = "images\application";
 
@@ -37,7 +37,7 @@ namespace Touri_Server.Models
         public static string MessageNotDelivered = "Unable to deliver message.";
 
         public static int Uninitialized = -1;
-        public static int SUCCESS= 1;
+        public static int SUCCESS = 1;
         public static int FAIL = -1;
     }
 
@@ -100,7 +100,7 @@ namespace Touri_Server.Models
             cm.id = msg.id;
             cm.message = msg.message1;
             cm.fromUser = msg.fromUser;
-            
+
             cm.toUser = msg.toUser;
             cm.timeStamp = msg.Timestamp.ToString();
             int fromId = -1;
@@ -116,7 +116,7 @@ namespace Touri_Server.Models
             }
             cm.toUserId = toId;
             cm.fromUserId = fromId;
-            
+
             return cm;
         }
 
@@ -134,24 +134,25 @@ namespace Touri_Server.Models
             g.summary = guideProfile.summary;
 
             int countCons = (int) (from cons in db.Connections
-                             where (cons.username == g.username)
-                             select cons).Count();
-            
+                                  where (cons.username == g.username)
+                                  select cons).Count();
+
             g.availability = 0;
-            if (countCons>0)
+            if (countCons > 0)
             {
-                g.availability = 1;                
+                g.availability = 1;
             }
 
             var lastUpdate = (from lastMsg in db.UserLastMessages
-                                   where (lastMsg.Username == g.username)
-                                   select lastMsg);
-            g.lastMessageSent = "N/A";
-            if (lastUpdate.Count<UserLastMessage>()>0)
+                              where (lastMsg.Username == g.username)
+                              select lastMsg);
+            g.lastMessageSent = "Not available";
+            if (lastUpdate.Count<UserLastMessage>() > 0)
             {
-                g.lastMessageSent = lastUpdate.First<UserLastMessage>().LastDateTime.ToShortDateString().ToString();
+                g.lastMessageSent = TranslateTime(lastUpdate.First<UserLastMessage>().LastDateTime);
+                //g.lastMessageSent = lastUpdate.First<UserLastMessage>().LastDateTime.ToShortDateString().ToString();
             }
-            
+
             g.profileImage = guideProfile.profileImage;
 
             foreach (GuideLanguage l in guideProfile.GuideLanguages)
@@ -183,9 +184,36 @@ namespace Touri_Server.Models
 
             return g;
         }
+
+        private string TranslateTime(DateTime lastChatTime)
+        {
+            string timeElapsed = "Not available";
+            DateTime now = DateTime.Now;
+
+            TimeSpan ts = now.Subtract(lastChatTime);
+
+            if (ts.TotalHours <= 1.0)
+            {
+                timeElapsed = "< 1 hour ago";
+            }
+            else if (ts.TotalHours > 1.0 && ts.TotalHours <= 24.0)
+            {
+                timeElapsed = "A few hours ago";
+            }
+            else if (ts.TotalHours > 24.0 && ts.TotalHours <= 168.0)
+            {
+                timeElapsed = "Within this week";
+            }
+            else
+            {
+                timeElapsed = "> 1 week ago";
+            }
+
+            return timeElapsed;
+        }
     }
 
-   
+
     public class Geocoder
     {
         public Geocoder()
