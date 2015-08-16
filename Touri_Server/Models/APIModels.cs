@@ -14,6 +14,7 @@ namespace Touri_Server.Models
 
     public class TouriMessage
     {
+        public int messageId { get; set; }
         public string fromUser { get; set; }
         public string message { get; set; }
         public int fromUserId { get; set; }

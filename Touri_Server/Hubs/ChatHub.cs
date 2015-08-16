@@ -172,6 +172,7 @@ namespace Touri_Server.Hubs
             int messageId = LogNewMessage(message, fromUsername, targetUsername, fromUserId, toUserId, fromName, toName);
             TouriMessage newMsg = new TouriMessage();
 
+            newMsg.messageId = messageId;
 
             //if we can't log the message return an error
             if (messageId == Constants.Uninitialized)
